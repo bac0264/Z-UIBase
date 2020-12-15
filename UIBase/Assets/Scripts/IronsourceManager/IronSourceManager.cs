@@ -358,7 +358,6 @@ public class IronSourceManager : MonoBehaviour
 
     void RewardedVideoAdClosedEvent()
     {
-        Debug.Log("run");
         callback?.Invoke();
     }
 }

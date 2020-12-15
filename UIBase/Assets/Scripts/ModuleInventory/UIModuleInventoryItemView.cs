@@ -34,7 +34,7 @@ public class UIModuleInventoryItemView : EnhancedScrollerCellView, IPointerClick
 
             if (_icon != null)
             {
-                _icon.sprite = LoadResourceController.GetItemIcon(itemResource.id, itemResource.GetPriority());
+                _icon.sprite = LoadResourceController.GetItemIcon(itemResource.id);
             }
 
             if (_typeIcon != null)

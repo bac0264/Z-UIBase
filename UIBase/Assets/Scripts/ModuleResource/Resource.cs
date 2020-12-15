@@ -12,16 +12,18 @@ public enum ResourceType
 
 public enum ItemType
 {
-    Weapon = 0,
-    Armor = 1,
-    Ring = 2,
+    Weapon = 1,
+    Armor = 2,
     Armulet = 3,
+    Ring = 4,
 }
 
 public enum MoneyType
 {
-    GEM = 0,
-    GOLD = 1,
+    GOLD = 0,
+    GEM = 1,
+    
+    DAILY_RAW_PACK_COUNT = 15,
 }
 
 [System.Serializable]
@@ -88,43 +90,8 @@ public class Resource
         number = value;
     }
 
-}
-
-[System.Serializable]
-public class Reward : Resource, IRecieveReward
-{
-    /// <summary>
-    /// Resource constructor with params
-    /// </summary>
-    /// <param name="type"> A type in ResourceType. </param>
-    /// <param name="id"> Unique identify of a type. </param>
-    /// <param name="number"> Number of resource.. </param>
-    /// <returns></returns>
-    public Reward(int type, int id, long number) : base(type, id, number)
+    public virtual Reward GetReward()
     {
-    }
-    public static Reward CreateInstanceReward(int type,   int id, long number)
-    {
-        return new Reward(type, id, number);
-    }
-
-    public void RecieveReward()
-    {
-        if (type == (int)ResourceType.ItemType)
-        {
-            DataPlayer.PlayerInventory.AddNewItem(ItemResource.CreateInstance(type, id, number, 0 , 0));
-        }
-        else if(type == (int)ResourceType.MoneyType)
-        {
-            DataPlayer.PlayerMoney.AddOne((MoneyType) id, number);
-        }
-        else if( type == (int) ResourceType.CharacterType )
-        {
-            
-        }
-        else
-        {
-            
-        }
+        return Reward.CreateInstanceReward(type, id, number);
     }
 }

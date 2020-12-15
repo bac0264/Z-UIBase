@@ -160,11 +160,8 @@ MonoBehaviour:
     type: 0
     id: 0
     number: 0
-    itemStats: []
     inventoryId: 0
-    isEquip: 0
     level: 0
-    priority: 0
   _icon: {fileID: 5925257867796111418}
   _typeIcon: {fileID: 0}
   _frame: {fileID: 8133536153529239090}
@@ -461,7 +458,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4638936139601671727}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -515,8 +512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8.1}
-  m_SizeDelta: {x: 93, y: 87}
+  m_AnchoredPosition: {x: 0, y: 0.000012398}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5309656088762261341
 CanvasRenderer:

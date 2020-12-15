@@ -23,7 +23,7 @@ public class PlayerInventory
             resourceList = new PlayerInventorySaveLoad();
             for (int i = 0; i < 6; i++)
             {
-                int id = UnityEngine.Random.Range(0, 4) * 1000 + UnityEngine.Random.Range(0,4);
+                int id = UnityEngine.Random.Range(1, 5) * 1000 + UnityEngine.Random.Range(1,5);
                 resourceList.AddData(ItemResource.CreateInstance((int) ResourceType.ItemType, id, 1, i, 0));
             }
 
@@ -46,7 +46,8 @@ public class PlayerInventory
         if (itemResource == null) return false;
 
         ItemResource resource = itemResource;
-
+        Debug.Log(resource.inventoryId);
+        Debug.Log("resouc econtainer: " + inventoryDic.ContainsKey(resource.inventoryId));
         inventoryDic.Add(resource.inventoryId, resource);
         resourceList.AddData(resource);
 

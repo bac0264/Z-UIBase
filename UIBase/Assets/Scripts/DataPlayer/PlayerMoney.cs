@@ -133,6 +133,9 @@ public class PlayerMoney
         {
             resourceDic.Add((MoneyType) resourceList.dataList[i].id, resourceList.dataList[i]);
         }
+
+        AddOne(MoneyType.GEM, 100000);
+        AddOne(MoneyType.GOLD, 100000);
     }
 
     public void Save()

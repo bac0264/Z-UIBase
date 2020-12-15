@@ -8,60 +8,77 @@ public class UIShopRawPackView : MonoBehaviour
 {
     [SerializeField] private Text priceTxt;
     [SerializeField] private Text packNameTxt;
-    
+    [SerializeField] private Text freeTxt;
+
     [SerializeField] private Image icon;
-    
+
     [SerializeField] private Button purchaseBtn;
     [SerializeField] private Button freeBtn;
 
-    [SerializeField] private List<Reward> rewardDatas;
+    [SerializeField] private Reward[] rewardDatas;
 
-    [SerializeField] private Resource price;
-    public int id;
-    
+    [SerializeField] private RawPackInfo info;
+
+    [SerializeField] private int id;
+
     private void Awake()
     {
         InitButtons();
-        InitView();
+        InitLocalize();
     }
 
-    private void InitView()
+    public void InitView(RawPackInfo info, int id)
     {
-        price = Resource.CreateInstance((int)ResourceType.MoneyType, (int)MoneyType.GEM, 20 * (id + 1));
-        var rewardNumber = 100 * (id + 1);
+        this.id = id;
+        this.info = info;
         icon.sprite = LoadResourceController.GetRawPackIcon(id);
-        packNameTxt.text = "Raw pack: " + (id + 1);
-        priceTxt.text = price.number + "$";
 
-        rewardDatas = new List<Reward>();
-        rewardDatas.Add(Reward.CreateInstanceReward(UnityEngine.Random.Range(0,2), UnityEngine.Random.Range(0,3), rewardNumber));
+        priceTxt.text = info.cost.ToString();
     }
-    
-    
+
+    private void RefreshUI()
+    {
+        var count = DataPlayer.PlayerMoney.GetMoney(MoneyType.DAILY_RAW_PACK_COUNT).number;
+    }
     private void InitButtons()
     {
         purchaseBtn.onClick.AddListener(OnClickPurchase);
         freeBtn.onClick.AddListener(OnClickFreeBtn);
+        freeBtn.gameObject.SetActive(false);
     }
-    
+
+    private void InitLocalize()
+    {
+        freeTxt.text = "Free";
+    }
+
     private void OnClickFreeBtn()
     {
         void onSuccess()
         {
-            
+            Debug.Log(" ironsource success");
+            AddRewards();
         }
+
         IronSourceManager.instance.ShowRewardedVideo(onSuccess);
     }
 
     private void OnClickPurchase()
     {
-        var canPurchase = DataPlayer.PlayerMoney.IsEnoughMoney(price);
-        if (canPurchase)
+        void onSuccess()
         {
-            for (int i = 0; i < rewardDatas.Count; i++)
-            {
-                rewardDatas[i].RecieveReward();
-            }
+            Debug.Log(" IAP success");
+            AddRewards();
+        }
+        
+        IAPManager.Instance.Buy("id", onSuccess);
+    }
+
+    private void AddRewards()
+    {
+        for (int i = 0; i < rewardDatas.Length; i++)
+        {
+            rewardDatas[i].RecieveReward();
         }
     }
 }

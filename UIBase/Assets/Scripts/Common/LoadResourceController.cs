@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class LoadResourceController
@@ -43,25 +44,88 @@ public class LoadResourceController
         else fullPath = path;
         return Resources.LoadAll<T>(fullPath) as T[];
     }
-
-    public static Sprite GetItemIcon(int type, int id)
+    
+    #region Get Sprite
+    public static Sprite GetItemIcon(int id)
     {
-        var _type = type / 1000;
-        return LoadFromResource<Sprite>(string.Format(PathUtils.itemResourceIcons, _type, id));
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconItems, id));
     }
     
     public static Sprite GetCharacterItem(int id)
     {
-        return LoadFromResource<Sprite>(string.Format(PathUtils.itemCharacters, id));
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconCharacters, id));
     }
     
     public static Sprite GetFrameWithPriority(int priority)
     {
-        return LoadFromResource<Sprite>(string.Format(PathUtils.itemFrames, priority));
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconFrames, priority));
     }
     
     public static Sprite GetRawPackIcon(int id)
     {
-        return LoadFromResource<Sprite>(string.Format(PathUtils.itemRawPackIcons, id));
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconRawPacks, id));
     }
+    
+    public static Sprite GetBundleItemIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconRawPacks, id));
+    }
+    
+    public static Sprite GetMoneyIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconCoins, id));
+    }
+    
+    public static Sprite GetIconResource(int type, int id)
+    {
+        if (type == (int) ResourceType.ItemType)
+        {
+            return GetItemIcon(id);
+        }
+        else if(type == (int) ResourceType.MoneyType)
+        {
+            return GetMoneyIcon(id);
+        }
+        else if(type == (int) ResourceType.CharacterType)
+        {
+            return GetCharacterItem(id);
+        }
+
+        return null;
+    }
+    
+    #endregion
+    
+    #region Get Prefabs
+    public static UIShopRawPackView GetRawPackView()
+    {
+        return LoadFromResource<UIShopRawPackView>(PathUtils.rawPackView);
+    }
+    
+    public static UIShopBundleItemView GetBundleItemView()
+    {
+        return LoadFromResource<UIShopBundleItemView>(PathUtils.bundleItemView);
+    }
+    
+    public static IconView GetIconView()
+    {
+        return LoadFromResource<IconView>(PathUtils.iconView);
+    }
+    #endregion
+    
+    #region Get Collection
+
+    public static ShopRawPackCollection GetShopRawPackCollection()
+    {
+        string fullPath = PathUtils.collectionPath + PathUtils.shopPath + PathUtils.shopRawPack;
+        return LoadFromResource<ShopRawPackCollection>(fullPath);
+    }
+    
+    [CanBeNull]
+    public static ShopBundleCollection GetShopBundleCollection()
+    {
+        string fullPath = PathUtils.collectionPath + PathUtils.shopPath + PathUtils.shopBundle;
+        return LoadFromResource<ShopBundleCollection>(fullPath);
+    }
+    #endregion
 }
