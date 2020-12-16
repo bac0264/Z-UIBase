@@ -64,6 +64,10 @@ public class ItemStat
     /// </summary>
     public int statType;
 
+    public ItemStat()
+    {
+        
+    }
     public ItemStat(float _baseStat, StatType _statType)
     {
         this.baseStat = BaseStat.CreateInstance(_baseStat);

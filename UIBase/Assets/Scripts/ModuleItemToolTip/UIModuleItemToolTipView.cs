@@ -81,7 +81,7 @@ public class UIModuleItemToolTipView : MonoBehaviour
                 if (!isMaxLevel)
                 {
                     var nextLevel = itemStat.GetCopy();
-                    nextLevel.baseStat.BaseValue = itemPick.level + 2;
+                    nextLevel.baseStat.baseValue = itemPick.level + 2;
                     nextStats += nextLevel.GetLocalize() + "\n";
                 }
             }
@@ -93,13 +93,13 @@ public class UIModuleItemToolTipView : MonoBehaviour
             for (int i = 0; i < itemPick.itemStats.Length; i++)
             {
 
-                itemPick.itemStats[i].baseStat.BaseValue = itemPick.level + 1 ;
+                itemPick.itemStats[i].baseStat.baseValue = itemPick.level + 1 ;
                 stats += itemPick.itemStats[i].GetLocalize() + "\n";
 
                 if (!isMaxLevel)
                 {
                     var nextLevel = itemPick.itemStats[i].GetCopy();
-                    nextLevel.baseStat.BaseValue = itemPick.level + 2;
+                    nextLevel.baseStat.baseValue = itemPick.level + 2;
                     nextStats += nextLevel.GetLocalize() + "\n";
                 }
             }

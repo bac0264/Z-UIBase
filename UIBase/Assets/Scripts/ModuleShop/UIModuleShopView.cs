@@ -32,10 +32,10 @@ public class UIModuleShopView : MonoBehaviour
     private void InitRawPacks()
     {
 
-        for (int i = 0; i < shopRawPack.shopGroups.Length; i++)
+        for (int i = 0; i < shopRawPack.dataGroups.Length; i++)
         {
             var raw = Instantiate(rawPrefabs, rawPackContainer);
-            raw.InitView(shopRawPack.shopGroups[i], i);
+            raw.InitView(shopRawPack.dataGroups[i], i);
             rawPacks.Add(raw);
         }
     }
@@ -43,10 +43,10 @@ public class UIModuleShopView : MonoBehaviour
     private void InitBundleItems()
     {
 
-        for (int i = 0; i < shopBundlePack.shopGroups.Length; i++)
+        for (int i = 0; i < shopBundlePack.dataGroups.Length; i++)
         {
             var bundleItem = Instantiate(bundleItemPrefabs, bundleContainer);
-            bundleItem.InitView(shopBundlePack.shopGroups[i], i);
+            bundleItem.InitView(shopBundlePack.dataGroups[i], i);
             bundleItems.Add(bundleItem);
         }
     }

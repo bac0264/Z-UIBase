@@ -9,7 +9,9 @@ public class UIShopRawPackView : MonoBehaviour
     [SerializeField] private Text priceTxt;
     [SerializeField] private Text packNameTxt;
     [SerializeField] private Text freeTxt;
-
+    [SerializeField] private Text freeCountTxt;
+    [SerializeField] private Text boughtCountTxt; 
+    
     [SerializeField] private Image icon;
 
     [SerializeField] private Button purchaseBtn;
@@ -31,20 +33,28 @@ public class UIShopRawPackView : MonoBehaviour
     {
         this.id = id;
         this.info = info;
+        
         icon.sprite = LoadResourceController.GetRawPackIcon(id);
-
         priceTxt.text = info.cost.ToString();
+
+        RefreshUI();
     }
 
     private void RefreshUI()
     {
-        var count = DataPlayer.PlayerMoney.GetMoney(MoneyType.DAILY_RAW_PACK_COUNT).number;
+        var isFree = info.free && DataPlayer.PlayerShop.IsAvailableForBuying(ShopEnum.RAW_PACK_FREE, id, info.stockFree);
+        
+        freeBtn.gameObject.SetActive(isFree);
+        purchaseBtn.gameObject.SetActive(!isFree);
+
+        freeCountTxt.text = DataPlayer.PlayerShop.GetBoughtCount(ShopEnum.RAW_PACK_FREE, id).ToString() +"/" + info.stockFree;
+        boughtCountTxt.text = DataPlayer.PlayerShop.GetBoughtCount(ShopEnum.RAW_PACK, id).ToString();
     }
+    
     private void InitButtons()
     {
         purchaseBtn.onClick.AddListener(OnClickPurchase);
         freeBtn.onClick.AddListener(OnClickFreeBtn);
-        freeBtn.gameObject.SetActive(false);
     }
 
     private void InitLocalize()
@@ -57,6 +67,7 @@ public class UIShopRawPackView : MonoBehaviour
         void onSuccess()
         {
             Debug.Log(" ironsource success");
+            DataPlayer.PlayerShop.AddBought(ShopEnum.RAW_PACK_FREE, id);
             AddRewards();
         }
 
@@ -68,10 +79,12 @@ public class UIShopRawPackView : MonoBehaviour
         void onSuccess()
         {
             Debug.Log(" IAP success");
+            DataPlayer.PlayerShop.AddBought(ShopEnum.RAW_PACK, id);
             AddRewards();
+            
         }
-        
-        IAPManager.Instance.Buy("id", onSuccess);
+
+        IAPManager.Instance.Buy(info.packnameIap, onSuccess);
     }
 
     private void AddRewards()
@@ -80,5 +93,7 @@ public class UIShopRawPackView : MonoBehaviour
         {
             rewardDatas[i].RecieveReward();
         }
+
+        RefreshUI();
     }
 }

@@ -52,3 +52,46 @@ public class ShopGroupExample : ScriptableObject
     
 }
 
+#if UNITY_EDITOR
+public class GroupPostprocessor : AssetPostprocessor
+{
+    static string path = "/shop_group.csv";
+    static string subPath = "/shop";
+    static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+    {
+        string fullPath = subPath + path;
+        
+        Setup(path, fullPath, importedAssets);
+    }
+
+    static void Setup(string path, string fullPath, string[] importedAssets)
+    {
+        foreach (string str in importedAssets)
+        {
+            if (str.IndexOf(path) != -1)
+            {
+                var assetPath = str.Replace(path, fullPath);
+                
+                TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
+                
+                string assetfile = assetPath.Replace(".csv", ".asset");
+                
+                ShopGroupExample gm = AssetDatabase.LoadAssetAtPath<ShopGroupExample>(assetfile);
+                if (gm == null)
+                {
+                    gm = ScriptableObject.CreateInstance<ShopGroupExample>();
+                    AssetDatabase.CreateAsset(gm, assetfile);
+                }
+                
+                gm.shopGroups = CSVSerializer.Deserialize<ShopGroupExample.ShopGroup>(data.text);
+                
+                EditorUtility.SetDirty(gm);
+                AssetDatabase.SaveAssets();
+#if DEBUG_LOG || UNITY_EDITOR
+                Debug.Log("Reimported Asset: " + assetPath);
+#endif
+            }
+        }
+    }
+}
+#endif

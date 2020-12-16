@@ -12,39 +12,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e693eba7cbf6ca4cad6bd145d675d58, type: 3}
   m_Name: shop_raw_pack
   m_EditorClassIdentifier: 
-  shopGroups:
+  dataGroups:
   - id: 1
     rewards:
-    - res_type: 2
-      res_id: 10
-      res_number: 10
-    stock: -1
+    - resType: 0
+      resId: 1
+      resNumber: 100
+    stock: 2
     cost: 19.99
+    packnameIap: pack1
+    stockFree: 3
+    free: 1
   - id: 2
     rewards:
-    - res_type: 2
-      res_id: 51
-      res_number: 1
+    - resType: 0
+      resId: 1
+      resNumber: 200
     stock: -1
     cost: 29.99
+    packnameIap: pack2
+    stockFree: 0
+    free: 0
   - id: 3
     rewards:
-    - res_type: 2
-      res_id: 30
-      res_number: 5
+    - resType: 0
+      resId: 1
+      resNumber: 300
     stock: -1
     cost: 39.99
+    packnameIap: pack3
+    stockFree: 0
+    free: 0
   - id: 4
     rewards:
-    - res_type: 2
-      res_id: 30
-      res_number: 5
+    - resType: 0
+      resId: 1
+      resNumber: 400
     stock: 0
     cost: 49.99
+    packnameIap: pack4
+    stockFree: 0
+    free: 0
   - id: 5
     rewards:
-    - res_type: 2
-      res_id: 51
-      res_number: 5
+    - resType: 0
+      resId: 1
+      resNumber: 500
     stock: -1
     cost: 59.99
+    packnameIap: pack5
+    stockFree: 0
+    free: 0

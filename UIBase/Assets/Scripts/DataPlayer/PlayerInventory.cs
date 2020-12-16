@@ -21,10 +21,11 @@ public class PlayerInventory
         if (resourceList == null)
         {
             resourceList = new PlayerInventorySaveLoad();
+            resourceList.inventoryIdMax = 0;
             for (int i = 0; i < 6; i++)
             {
                 int id = UnityEngine.Random.Range(1, 5) * 1000 + UnityEngine.Random.Range(1,5);
-                resourceList.AddData(ItemResource.CreateInstance((int) ResourceType.ItemType, id, 1, i, 0));
+                resourceList.AddNewData(ItemResource.CreateInstance((int) ResourceType.ItemType, id, 1, resourceList.inventoryIdMax, 0));
             }
 
             Save();

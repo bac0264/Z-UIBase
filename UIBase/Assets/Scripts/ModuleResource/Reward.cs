@@ -4,21 +4,21 @@
 public class Reward : IRecieveReward
 {
 
-    public int res_type;
+    public int resType;
 
-    public int res_id;
+    public int resId;
 
-    public long res_number;
+    public long resNumber;
 
     public Reward()
     {
     }
     
-    public Reward(int res_type, int res_id, long res_number)
+    public Reward(int resType, int resId, long resNumer)
     {
-        this.res_type = res_type;
-        this.res_id = res_id;
-        this.res_number = res_number;
+        this.resType = resType;
+        this.resId = resId;
+        this.resNumber = resNumer;
     }
 
     public static Reward CreateInstanceReward(int type, int id, long number)
@@ -28,20 +28,20 @@ public class Reward : IRecieveReward
 
     public Resource GetResource()
     {
-        return Resource.CreateInstance(res_type, res_id, res_number);
+        return Resource.CreateInstance(resType, resId, resNumber);
     }
 
     public void RecieveReward()
     {
-        if (res_type == (int) ResourceType.ItemType)
+        if (resType == (int) ResourceType.ItemType)
         {
-            DataPlayer.PlayerInventory.AddNewItem(ItemResource.CreateInstance(res_type, res_id, res_number, 0, 0));
+            DataPlayer.PlayerInventory.AddNewItem(ItemResource.CreateInstance(resType, resId, resNumber, 0, 0));
         }
-        else if (res_type == (int) ResourceType.MoneyType)
+        else if (resType == (int) ResourceType.MoneyType)
         {
-            DataPlayer.PlayerMoney.AddOne((MoneyType) res_id, res_number);
+            DataPlayer.PlayerMoney.AddOne((MoneyType) resId, resNumber);
         }
-        else if (res_type == (int) ResourceType.CharacterType)
+        else if (resType == (int) ResourceType.CharacterType)
         {
 
         }

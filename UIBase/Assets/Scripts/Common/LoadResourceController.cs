@@ -76,6 +76,11 @@ public class LoadResourceController
         return LoadFromResource<Sprite>(string.Format(PathUtils.iconCoins, id));
     }
     
+    public static Sprite GetCurrencyIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconCurrencies, id));
+    }
+
     public static Sprite GetIconResource(int type, int id)
     {
         if (type == (int) ResourceType.ItemType)
@@ -84,7 +89,7 @@ public class LoadResourceController
         }
         else if(type == (int) ResourceType.MoneyType)
         {
-            return GetMoneyIcon(id);
+            return GetCurrencyIcon(id);
         }
         else if(type == (int) ResourceType.CharacterType)
         {
@@ -117,14 +122,14 @@ public class LoadResourceController
 
     public static ShopRawPackCollection GetShopRawPackCollection()
     {
-        string fullPath = PathUtils.collectionPath + PathUtils.shopPath + PathUtils.shopRawPack;
+        string fullPath = PathUtils.shopRawPack;
         return LoadFromResource<ShopRawPackCollection>(fullPath);
     }
     
     [CanBeNull]
     public static ShopBundleCollection GetShopBundleCollection()
     {
-        string fullPath = PathUtils.collectionPath + PathUtils.shopPath + PathUtils.shopBundle;
+        string fullPath = PathUtils.shopBundle;
         return LoadFromResource<ShopBundleCollection>(fullPath);
     }
     #endregion

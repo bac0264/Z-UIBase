@@ -19,6 +19,11 @@ public class CSVSerializer
         return (T[]) CreateArray(typeof(T), ParseCsv(text));
     }
 
+    static public object Deserialize(string text, Type type)
+    {
+        return  CreateArray(type, ParseCsv(text));
+    }
+
     static public T[] Deserialize<T>(List<string[]> rows)
     {
         return (T[]) CreateArray(typeof(T), rows);
@@ -51,6 +56,17 @@ public class CSVSerializer
             {
                 if (!table.ContainsKey(id))
                 {
+                    // Debug.Log("id: " +id);
+                    var index = id.IndexOf("_");
+                    if (index < id.Length)
+                    {
+                        id = id.Replace("_" + id[index + 1], id[index + 1].ToString().ToUpper());
+                    }
+                    else
+                    {
+                        id = id.Replace("_", "");
+                    }
+
                     table.Add(id, i);
                 }
                 else
@@ -69,7 +85,7 @@ public class CSVSerializer
             object rowData = Create(startRows[i], 0, rows, table, type);
             arrayValue.SetValue(rowData, i);
         }
-
+        
         return arrayValue;
     }
 
@@ -77,7 +93,7 @@ public class CSVSerializer
     {
         object v = Activator.CreateInstance(type);
 
-        FieldInfo[] fieldInfo = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        FieldInfo[] fieldInfo = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         var cols = rows[index];
         foreach (FieldInfo tmp in fieldInfo)
@@ -123,7 +139,7 @@ public class CSVSerializer
                     {
                         throw new Exception("Full name is nil");
                     }
-                    
+
                     Type elementType = GetType(typeName);
 
                     var objectIndex = GetObjectIndex(elementType, table);
@@ -178,7 +194,7 @@ public class CSVSerializer
             fieldInfo.SetValue(v, value);
         else if (value.Equals(string.Empty))
         {
-            fieldInfo.SetValue(v, 0);  
+            fieldInfo.SetValue(v, 0);
         }
         else
         {

@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906e47661921eac439d9ba8bfdc8b226, type: 3}
+  m_Name: item_stats
+  m_EditorClassIdentifier: 
+  dataGroups:
+  - id: 1001
+    itemStats:
+    - baseStat:
+        baseValue: 10
+      statType: 0
+    - baseStat:
+        baseValue: 10
+      statType: 1
+  - id: 1002
+    itemStats:
+    - baseStat:
+        baseValue: 20
+      statType: 0
+    - baseStat:
+        baseValue: 20
+      statType: 1
+  - id: 1003
+    itemStats:
+    - baseStat:
+        baseValue: 30
+      statType: 0
+    - baseStat:
+        baseValue: 30
+      statType: 1
+  - id: 1004
+    itemStats:
+    - baseStat:
+        baseValue: 40
+      statType: 0
+    - baseStat:
+        baseValue: 40
+      statType: 2
+    - baseStat:
+        baseValue: 40
+      statType: 1
+  - id: 2001
+    itemStats:
+    - baseStat:
+        baseValue: 10
+      statType: 1
+    - baseStat:
+        baseValue: 10
+      statType: 2
+  - id: 2002
+    itemStats:
+    - baseStat:
+        baseValue: 20
+      statType: 1
+    - baseStat:
+        baseValue: 20
+      statType: 2
+  - id: 2003
+    itemStats:
+    - baseStat:
+        baseValue: 30
+      statType: 1
+    - baseStat:
+        baseValue: 30
+      statType: 2
+  - id: 2004
+    itemStats:
+    - baseStat:
+        baseValue: 40
+      statType: 1
+    - baseStat:
+        baseValue: 40
+      statType: 2
+    - baseStat:
+        baseValue: 40
+      statType: 3
+  - id: 3001
+    itemStats:
+    - baseStat:
+        baseValue: 10
+      statType: 2
+    - baseStat:
+        baseValue: 10
+      statType: 3
+  - id: 3002
+    itemStats:
+    - baseStat:
+        baseValue: 40
+      statType: 2
+    - baseStat:
+        baseValue: 50
+      statType: 3
+  - id: 3003
+    itemStats:
+    - baseStat:
+        baseValue: 35
+      statType: 2
+    - baseStat:
+        baseValue: 30
+      statType: 3
+  - id: 3004
+    itemStats:
+    - baseStat:
+        baseValue: 41
+      statType: 2
+    - baseStat:
+        baseValue: 42
+      statType: 3
+    - baseStat:
+        baseValue: 45
+      statType: 0
+  - id: 4001
+    itemStats:
+    - baseStat:
+        baseValue: 15
+      statType: 2
+    - baseStat:
+        baseValue: 15
+      statType: 3
+  - id: 4002
+    itemStats:
+    - baseStat:
+        baseValue: 25
+      statType: 2
+    - baseStat:
+        baseValue: 20
+      statType: 3
+  - id: 4003
+    itemStats:
+    - baseStat:
+        baseValue: 35
+      statType: 2
+    - baseStat:
+        baseValue: 35
+      statType: 3
+  - id: 4004
+    itemStats:
+    - baseStat:
+        baseValue: 50
+      statType: 2
+    - baseStat:
+        baseValue: 50
+      statType: 3
+    - baseStat:
+        baseValue: 50
+      statType: 0

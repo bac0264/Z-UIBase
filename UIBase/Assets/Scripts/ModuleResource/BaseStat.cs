@@ -6,19 +6,19 @@ using UnityEngine;
 [Serializable]
 public class BaseStat
 {
-    public float BaseValue;
+    public float baseValue;
 
-    protected bool isDirty = true;
-    protected float lastBaseValue;
+    private bool isDirty = true;
+    private float lastBaseValue;
 
-    protected float _value;
+    private float _value;
     public virtual float Value
     {
         get
         {
-            if (isDirty || lastBaseValue != BaseValue)
+            if (isDirty || lastBaseValue != baseValue)
             {
-                lastBaseValue = BaseValue;
+                lastBaseValue = baseValue;
                 _value = CalculateFinalValue();
                 isDirty = false;
             }
@@ -26,8 +26,8 @@ public class BaseStat
         }
     }
 
-    protected readonly List<StatModifier> statModifiers;
-    public readonly ReadOnlyCollection<StatModifier> StatModifiers;
+    private readonly List<StatModifier> statModifiers;
+    private readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
     public BaseStat()
     {
@@ -37,7 +37,7 @@ public class BaseStat
 
     public BaseStat(float baseValue) : this()
     {
-        BaseValue = baseValue;
+        baseValue = baseValue;
     }
 
     public virtual void AddModifier(StatModifier mod)
@@ -92,7 +92,7 @@ public class BaseStat
 
     protected virtual float CalculateFinalValue()
     {
-        float finalValue = BaseValue;
+        float finalValue = baseValue;
         float sumPercentAdd = 0;
 
         for (int i = 0; i < statModifiers.Count; i++)

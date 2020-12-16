@@ -23,7 +23,6 @@ public enum MoneyType
     GOLD = 0,
     GEM = 1,
     
-    DAILY_RAW_PACK_COUNT = 15,
 }
 
 [System.Serializable]

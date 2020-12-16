@@ -17,11 +17,12 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
     public Action callBack;
 
+    public ConfigurationBuilder builder;
     //public static string kProductIDConsumable = "consumable";
     //public static string kProductIDNonConsumable = "nonconsumable";
     //public static string kProductIDSubscription = "subscription";
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -63,9 +64,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
         }
 
         // Create a builder, first passing in a suite of Unity provided stores.
-        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        builder.AddProduct(buyid25gem, ProductType.Consumable);
+        builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
+        AddConsumableIds();
         // Add a product to sell / restore by way of its identifier, associating the general identifier
         // with its store-specific identifiers.
 
@@ -90,6 +91,31 @@ public class IAPManager : MonoBehaviour, IStoreListener
         UnityPurchasing.Initialize(this, builder);
     }
 
+    private void AddConsumableIds()
+    {
+        AddRawPackIds();
+        AddBundleIds();
+    }
+
+    private void AddRawPackIds()
+    {
+        var rawCollection = LoadResourceController.GetShopRawPackCollection();
+        var productIdList = rawCollection.GetShopRawPackProductIds();
+        for (int i = 0; i < productIdList.Count; i++)
+        {
+            builder.AddProduct(productIdList[i], ProductType.Consumable);
+        }
+    }
+    
+    private void AddBundleIds()
+    {
+        var bundleCollection = LoadResourceController.GetShopBundleCollection();
+        var productIdList = bundleCollection.GetShopBundleProductIds();
+        for (int i = 0; i < productIdList.Count; i++)
+        {
+            builder.AddProduct(productIdList[i], ProductType.Consumable);
+        }
+    }
     private bool IsInitialized()
     {
         // Only say we are initialized if both the Purchasing references are set.
