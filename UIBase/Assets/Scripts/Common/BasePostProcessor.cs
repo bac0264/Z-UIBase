@@ -1,61 +1,101 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using EnhancedScrollerDemos.MultipleCellTypesDemo;
 using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
 public class BasePostProcessor : AssetPostprocessor
 {
-    public static string assetfile = "/";
-
-    public static string classScriptObject = "/";
-
-    public static string classData = "/";
-
-    public static bool isRun = false;
-    
-    public BasePostProcessor()
-    {
-    }
-
     public static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets,
         string[] movedFromAssetPaths)
+
     {
-        var asset = assetfile;
-        
-        string[] csv = asset.Split('/');
-        
-        var data = csv[csv.Length - 1] + ".csv";
-        
-        Setup(data, importedAssets);
+        string[] asset;
+        if (importedAssets.Length > 0)
+        {
+            asset = importedAssets[0].Split('/');
+        }
+        else
+            return;
+
+        var data = asset[asset.Length - 1];
+        if (data.Contains(".csv"))
+            Setup(data, importedAssets);
     }
 
     static void Setup(string path, string[] importedAssets)
     {
+        Action<string, TextAsset, Type, Type> genAsset =
+            delegate(string assetfile, TextAsset data, Type classCollection, Type classData)
+            {
+                var gm = AssetDatabase.LoadAssetAtPath(assetfile, classCollection);
+
+                if (gm == null)
+                {
+                    gm = ScriptableObject.CreateInstance(classCollection);
+                    AssetDatabase.CreateAsset(gm, assetfile);
+                }
+
+                Type type = classData;
+                var field = gm.GetType().GetField("dataGroups");
+                field.SetValue(gm, CSVSerializer.Deserialize(data.text, type));
+
+                EditorUtility.SetDirty(gm);
+                AssetDatabase.SaveAssets();
+            };
+
         foreach (string str in importedAssets)
         {
             if (str.IndexOf(path) != -1)
             {
+                Debug.Log("str: " + str);
                 TextAsset data = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
 
-                var fullPath = "Assets/Resources/" + assetfile + ".asset";
-                var gm = AssetDatabase.LoadAssetAtPath(fullPath, Type.GetType(classScriptObject));
-                if (gm == null)
-                {
-                    gm = ScriptableObject.CreateInstance(Type.GetType(classScriptObject));
-                    AssetDatabase.CreateAsset(gm, fullPath);
-                }
-                Type type = Type.GetType(classData);
+                var isDefineCollection = path.Equals("define_collection.csv");
 
-                var field = gm.GetType().GetField("dataGroups");
+                var assetfile = "";
+                Type classCollection;
+                Type classData;
+
+                if (isDefineCollection)
+                {
+                    assetfile = "Assets/Resources/Collection/define_collection.asset";
+                    classCollection = Type.GetType("DefineCollection");
+                    classData = Type.GetType("DefineData");
+                    genAsset(assetfile, data, classCollection, classData);
+                }
+                else
+                {
+                    var defineCollection = LoadResourceController.GetDefineCollection();
+
+                    if (defineCollection == null)
+                    {
+                        TextAsset textAsset =
+                            AssetDatabase.LoadAssetAtPath<TextAsset>(
+                                "Assets/Csv/Collection/define_collection.csv");
+
+                        Debug.Log("textAsset:" + textAsset);
+                        assetfile = "Assets/Resources/Collection/define_collection.asset";
+                        classCollection = Type.GetType("DefineCollection");
+                        classData = Type.GetType("DefineData");
+                        genAsset(assetfile, textAsset, classCollection, classData);
+                    }
+                    
+                    defineCollection = LoadResourceController.GetDefineCollection();
+                    var defineData = defineCollection.GetDefineCollectionData(path);
+                    if (defineData == null) return;
+
+                    assetfile = "Assets/Resources/" + defineData.assetPath + ".asset";
+                    classCollection = Type.GetType(defineData.classCollection);
+                    classData = Type.GetType(defineData.classData);
+                    genAsset(assetfile, data, classCollection, classData);
+                }
                 
-                field.SetValue(gm, CSVSerializer.Deserialize(data.text, type));
-                
-                EditorUtility.SetDirty(gm);
-                AssetDatabase.SaveAssets();
-                isRun = false;
 #if DEBUG_LOG || UNITY_EDITOR
                 Debug.Log("Reimported Asset: " + assetfile);
-#endif    
+#endif
             }
         }
     }

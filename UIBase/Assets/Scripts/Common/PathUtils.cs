@@ -16,8 +16,14 @@ public class PathUtils
     public const string bundleItemView = "Prefabs/bundle_item_view";
     public const string iconView = "Prefabs/icon_view";
 
+
+    public const string defineCollection = "Collection/define_collection";
+        
     public const string shopRawPack = "Collection/shop/shop_raw_pack";
     public const string shopBundle = "Collection/shop/shop_bundle";
     
     public const string itemStats = "Collection/item/item_stats";
+    public const string statConfig = "Collection/item/stat_config";
+    public const string upgradeItem = "Collection/item/upgrade_item";
+    public const string sellItem = "Collection/item/sell_item";
 }

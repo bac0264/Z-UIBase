@@ -43,6 +43,21 @@ public class ItemResource : Resource
         return new ItemResource(type, id, number, inventoryId, level, itemStats);
     }
 
+    
+    public ItemStat[] GetAllStatNextLevel()
+    {
+        List<ItemStat> dataNextLevel = new List<ItemStat>();
+        if (itemStats != null)
+        {
+            for (int i = 0; i < itemStats.Length; i++)
+            {
+                dataNextLevel.Add(itemStats[i].GetStatNextLevel(level));
+            }
+        }
+
+        return dataNextLevel.ToArray();
+    }
+    
     public int GetPriority()
     {
         return id % 1000;
@@ -64,6 +79,7 @@ public class ItemStat
     /// </summary>
     public int statType;
 
+    private StatConfigCollection statConfigCollection = null;
     public ItemStat()
     {
         
@@ -80,9 +96,15 @@ public class ItemStat
         this.statType = (int)_statType;
     }
 
-    public ItemStat GetCopy()
+    public virtual ItemStat GetStatNextLevel(int level)
     {
-        return new ItemStat(baseStat.Value, statType);    
+        if (statConfigCollection == null)
+        {
+            statConfigCollection = LoadResourceController.GetStatConfigCollection();
+        }
+        var baseValue = statConfigCollection.GetStatConfigData(statType).GetBaseValue(level + 1);
+        ItemStat itemStat = new ItemStat(baseValue, statType);
+        return itemStat;    
     }
     
     public string GetLocalize()

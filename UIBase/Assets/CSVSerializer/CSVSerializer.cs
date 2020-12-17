@@ -85,8 +85,10 @@ public class CSVSerializer
             object rowData = Create(startRows[i], 0, rows, table, type);
             arrayValue.SetValue(rowData, i);
         }
-        
-        return arrayValue;
+
+        if (arrayValue.Length > 1)
+            return arrayValue;
+        return arrayValue.GetValue(0);
     }
 
     static object Create(int index, int parentIndex, List<string[]> rows, Dictionary<string, int> table, Type type)

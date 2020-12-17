@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class CharacterResource : Resource
 {
+    [NonSerialized] public CharacterStat[] characterStats;
+    
     public int characterId;
 
     public long exp;
@@ -22,4 +25,9 @@ public class CharacterResource : Resource
     {
         return new CharacterResource(type,id,number,characterId, exp);
     }
+}
+
+public class CharacterStat : ItemStat
+{
+    
 }

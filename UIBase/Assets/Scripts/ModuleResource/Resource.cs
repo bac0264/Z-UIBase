@@ -20,6 +20,7 @@ public enum ItemType
 
 public enum MoneyType
 {
+    NONE = -1,
     GOLD = 0,
     GEM = 1,
     

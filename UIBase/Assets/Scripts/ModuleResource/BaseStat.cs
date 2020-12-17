@@ -37,7 +37,7 @@ public class BaseStat
 
     public BaseStat(float baseValue) : this()
     {
-        baseValue = baseValue;
+        this.baseValue = baseValue;
     }
 
     public virtual void AddModifier(StatModifier mod)

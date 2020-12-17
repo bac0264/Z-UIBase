@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class IconView : MonoBehaviour
 {
-    [SerializeField] private Image icon;
+    public Image icon;
     
-    [SerializeField] private Text value;
-
-    public void SetData(Resource resource)
+    public Text value;
+    
+    public virtual void SetData(Resource resource)
     {
         icon.sprite = LoadResourceController.GetIconResource(resource.type, resource.id);
+        icon.SetNativeSize();
         value.text = resource.number.ToString();
     }
 }

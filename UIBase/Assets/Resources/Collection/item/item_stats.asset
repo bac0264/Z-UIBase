@@ -14,142 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataGroups:
   - id: 1001
-    itemStats:
-    - baseStat:
-        baseValue: 10
-      statType: 0
-    - baseStat:
-        baseValue: 10
-      statType: 1
+    statTypes: 0000000001000000
   - id: 1002
-    itemStats:
-    - baseStat:
-        baseValue: 20
-      statType: 0
-    - baseStat:
-        baseValue: 20
-      statType: 1
+    statTypes: 0000000001000000
   - id: 1003
-    itemStats:
-    - baseStat:
-        baseValue: 30
-      statType: 0
-    - baseStat:
-        baseValue: 30
-      statType: 1
+    statTypes: 000000000100000002000000
   - id: 1004
-    itemStats:
-    - baseStat:
-        baseValue: 40
-      statType: 0
-    - baseStat:
-        baseValue: 40
-      statType: 2
-    - baseStat:
-        baseValue: 40
-      statType: 1
+    statTypes: 00000000010000000200000003000000
   - id: 2001
-    itemStats:
-    - baseStat:
-        baseValue: 10
-      statType: 1
-    - baseStat:
-        baseValue: 10
-      statType: 2
+    statTypes: 0000000002000000
   - id: 2002
-    itemStats:
-    - baseStat:
-        baseValue: 20
-      statType: 1
-    - baseStat:
-        baseValue: 20
-      statType: 2
+    statTypes: 0000000002000000
   - id: 2003
-    itemStats:
-    - baseStat:
-        baseValue: 30
-      statType: 1
-    - baseStat:
-        baseValue: 30
-      statType: 2
+    statTypes: 000000000200000003000000
   - id: 2004
-    itemStats:
-    - baseStat:
-        baseValue: 40
-      statType: 1
-    - baseStat:
-        baseValue: 40
-      statType: 2
-    - baseStat:
-        baseValue: 40
-      statType: 3
+    statTypes: 00000000010000000200000003000000
   - id: 3001
-    itemStats:
-    - baseStat:
-        baseValue: 10
-      statType: 2
-    - baseStat:
-        baseValue: 10
-      statType: 3
+    statTypes: 0100000002000000
   - id: 3002
-    itemStats:
-    - baseStat:
-        baseValue: 40
-      statType: 2
-    - baseStat:
-        baseValue: 50
-      statType: 3
+    statTypes: 0100000002000000
   - id: 3003
-    itemStats:
-    - baseStat:
-        baseValue: 35
-      statType: 2
-    - baseStat:
-        baseValue: 30
-      statType: 3
+    statTypes: 010000000200000003000000
   - id: 3004
-    itemStats:
-    - baseStat:
-        baseValue: 41
-      statType: 2
-    - baseStat:
-        baseValue: 42
-      statType: 3
-    - baseStat:
-        baseValue: 45
-      statType: 0
+    statTypes: 00000000010000000200000003000000
   - id: 4001
-    itemStats:
-    - baseStat:
-        baseValue: 15
-      statType: 2
-    - baseStat:
-        baseValue: 15
-      statType: 3
+    statTypes: 0100000003000000
   - id: 4002
-    itemStats:
-    - baseStat:
-        baseValue: 25
-      statType: 2
-    - baseStat:
-        baseValue: 20
-      statType: 3
+    statTypes: 0100000003000000
   - id: 4003
-    itemStats:
-    - baseStat:
-        baseValue: 35
-      statType: 2
-    - baseStat:
-        baseValue: 35
-      statType: 3
+    statTypes: 010000000200000003000000
   - id: 4004
-    itemStats:
-    - baseStat:
-        baseValue: 50
-      statType: 2
-    - baseStat:
-        baseValue: 50
-      statType: 3
-    - baseStat:
-        baseValue: 50
-      statType: 0
+    statTypes: 00000000010000000200000003000000

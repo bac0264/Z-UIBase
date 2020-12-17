@@ -20,18 +20,18 @@ public class ShopRawPackCollection : ScriptableObject
     }
 }
 
-#if UNITY_EDITOR
-public class ShopRawPackProcessor : BasePostProcessor
-{
-    public ShopRawPackProcessor()
-    {
-        if (isRun == false)
-        {
-            assetfile = PathUtils.shopRawPack;
-            classScriptObject = "ShopRawPackCollection";
-            classData = "RawPackInfo";
-            isRun = true;
-        }
-    }
-}
-#endif
+// #if UNITY_EDITOR
+// public class ShopRawPackProcessor : BasePostProcessor
+// {
+//     // public ShopRawPackProcessor()
+//     // {
+//     //     if (isRun == false)
+//     //     {
+//     //         assetfile = PathUtils.shopRawPack;
+//     //         classScriptObject = "ShopRawPackCollection";
+//     //         classData = "RawPackInfo";
+//     //         isRun = true;
+//     //     }
+//     // }
+// }
+// #endif

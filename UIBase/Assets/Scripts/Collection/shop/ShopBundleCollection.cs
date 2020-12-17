@@ -26,18 +26,8 @@ public class ShopBundleCollection : ScriptableObject
     }
 }
 
-#if UNITY_EDITOR
-public class ShopBundleProcessor : BasePostProcessor
-{
-    public ShopBundleProcessor()
-    {
-        if (!isRun)
-        {
-            assetfile = PathUtils.shopBundle;
-            classScriptObject = "ShopBundleCollection";
-            classData = "BundlePackInfo";
-            isRun = true;
-        }
-    }
-}
-#endif
+// #if UNITY_EDITOR
+// public class ShopBundleProcessor : BasePostProcessor
+// {
+// }
+// #endif

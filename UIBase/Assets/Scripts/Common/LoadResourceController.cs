@@ -122,15 +122,37 @@ public class LoadResourceController
 
     public static ShopRawPackCollection GetShopRawPackCollection()
     {
-        string fullPath = PathUtils.shopRawPack;
-        return LoadFromResource<ShopRawPackCollection>(fullPath);
+        return LoadFromResource<ShopRawPackCollection>(PathUtils.shopRawPack);
     }
     
-    [CanBeNull]
     public static ShopBundleCollection GetShopBundleCollection()
     {
-        string fullPath = PathUtils.shopBundle;
-        return LoadFromResource<ShopBundleCollection>(fullPath);
+        return LoadFromResource<ShopBundleCollection>(PathUtils.shopBundle);
+    }
+    
+    public static ItemStatCollection GetItemStat()
+    {
+        return LoadFromResource<ItemStatCollection>(PathUtils.itemStats);
+    }
+    
+    public static DefineCollection GetDefineCollection()
+    {
+        return LoadFromResource<DefineCollection>(PathUtils.defineCollection);
+    }
+    
+    public static StatConfigCollection GetStatConfigCollection()
+    {
+        return LoadFromResource<StatConfigCollection>(PathUtils.statConfig);
+    }
+    
+    public static UpgradeItemCollection GetUpgradeItemCollection()
+    {
+        return LoadFromResource<UpgradeItemCollection>(PathUtils.upgradeItem);
+    }
+    
+    public static SellItemCollection GetSellItemCollection()
+    {
+        return LoadFromResource<SellItemCollection>(PathUtils.sellItem);
     }
     #endregion
 }

@@ -1,0 +1,9 @@
+id,class_collection,class_data,asset_path
+1,DefineCollection,DefineData,Collection/define_collection
+2,DefineCollection,DefineData,Collection/define_collection
+3,ShopBundleCollection,BundlePackInfo,Collection/shop/shop_bundle
+4,ShopRawPackCollection,RawPackInfo,Collection/shop/shop_raw_pack
+5,ItemStatCollection,ItemStatData,Collection/item/item_stats
+6,StatConfigCollection,StatConfigData,Collection/item/stat_config
+7,SellItemCollection,SellItemData,Collection/item/sell_item
+7,UpgradeItemCollection,UpgradeItemData,Collection/item/upgrade_item
