@@ -57,9 +57,7 @@ public class UIModuleInventoryView : MonoBehaviour, IEnhancedScrollerDelegate
             {
                 masterData.childData.Add(itemDatas[j]);
             }
-
         }
-
         // tell the scroller to reload now that we have the data
         masterScroller.GetComponent<ScrollRect>().verticalNormalizedPosition = 0;
         ReloadData();

@@ -88,7 +88,8 @@ public class PlayerCharacter
     {
         if (inventoryDic.ContainsKey(resourceList.currentCharacter))
         {
-            return inventoryDic[resourceList.currentCharacter];
+            var characterResource = inventoryDic[resourceList.currentCharacter];
+            return characterResource;
         }
         
         return null;

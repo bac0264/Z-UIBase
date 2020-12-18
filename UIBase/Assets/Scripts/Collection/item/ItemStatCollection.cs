@@ -29,9 +29,16 @@ public class ItemStatData
     public int[] statTypes;
 
     private StatConfigCollection statConfigCollection = null;
-    public ItemStat[] GetItemStats(int level)
+
+    public void SetStatConfigCollection(StatConfigCollection statConfigCollection)
     {
-        if (statConfigCollection == null) statConfigCollection = LoadResourceController.GetStatConfigCollection();
+        //if (statConfigCollection == null)
+            this.statConfigCollection = statConfigCollection;
+    }
+
+    public virtual ItemStat[] GetItemStats(int level)
+    {
+        SetStatConfigCollection(LoadResourceController.GetStatConfigCollection());
         
         List<ItemStat> itemStatList = new List<ItemStat>();
         for (int i = 0; i < statTypes.Length; i++)

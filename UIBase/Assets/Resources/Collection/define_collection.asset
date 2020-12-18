@@ -41,7 +41,19 @@ MonoBehaviour:
     classCollection: SellItemCollection
     classData: SellItemData
     assetPath: Collection/item/sell_item
-  - id: 7
+  - id: 8
     classCollection: UpgradeItemCollection
     classData: UpgradeItemData
     assetPath: Collection/item/upgrade_item
+  - id: 9
+    classCollection: CharacterStatCollection
+    classData: CharacterStatData
+    assetPath: Collection/character/character_stats
+  - id: 10
+    classCollection: CharacterStatConfigCollection
+    classData: CharacterStatConfigData
+    assetPath: Collection/character/character_config
+  - id: 11
+    classCollection: CharacterLevelCollection
+    classData: CharacterLevelData
+    assetPath: Collection/character/character_level

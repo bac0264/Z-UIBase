@@ -72,6 +72,7 @@ public class BaseStat
         }
         return didRemove;
     }
+    
     public virtual void RemoveAllModifiers()
     {
 
@@ -106,7 +107,6 @@ public class BaseStat
             else if (mod.Type == StatModType.PercentAdd)
             {
                 sumPercentAdd += mod.Value / 100;
-                Debug.Log(sumPercentAdd);
                 if (i + 1 >= statModifiers.Count || statModifiers[i + 1].Type != StatModType.PercentAdd)
                 {
                     finalValue *= 1 + sumPercentAdd;
@@ -124,5 +124,10 @@ public class BaseStat
     public static BaseStat CreateInstance(float baseValue)
     {
         return new BaseStat(baseValue);
+    }
+
+    public List<StatModifier> GetStatModifierList()
+    {
+        return statModifiers;
     }
 }

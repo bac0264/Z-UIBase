@@ -7,11 +7,7 @@ using UnityEngine.UI;
 public class UIModuleEquipmentView : MonoBehaviour
 {
     [SerializeField] private UIModuleEquipmentItemView[] equipments = null;
-    
-    // View
-    [SerializeField] private Text expTxt = null;
-    [SerializeField] private Image iconCharacter = null;
-    
+
     public Action<ItemResource> OnRightClickEvent;
 
     private CharacterResource currentCharacter;
@@ -42,9 +38,6 @@ public class UIModuleEquipmentView : MonoBehaviour
     {
         currentCharacter = DataPlayer.PlayerCharacter.GetCurrentCharacter();
         var itemList = DataPlayer.PlayerInventory.GetEquipmentItemWithIdCharacter(currentCharacter.characterId);
-
-        expTxt.text = "Exp: "+currentCharacter.exp;
-        iconCharacter.sprite = LoadResourceController.GetCharacterItem(currentCharacter.characterId);
         
         for (int i = 0; i < equipments.Length; i++)
         {

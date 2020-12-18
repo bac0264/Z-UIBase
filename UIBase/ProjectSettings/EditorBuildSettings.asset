@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scripts/IronsourceManager/3.Ads.unity
+    path: Assets/Scripts/Tutorial/3.IronsourceManager/3.Ads.unity
     guid: b3ca17bba1ce6c54e9b2515990a16e89
   m_configObjects: {}

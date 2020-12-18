@@ -99,6 +99,11 @@ public class LoadResourceController
         return null;
     }
     
+    public static Sprite GetStatIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconStats, id));
+    }
+
     #endregion
     
     #region Get Prefabs
@@ -116,6 +121,17 @@ public class LoadResourceController
     {
         return LoadFromResource<IconView>(PathUtils.iconView);
     }
+    
+    public static MoneyBarView GetMoneyBarView()
+    {
+        return LoadFromResource<MoneyBarView>(PathUtils.moneyBarView);
+    }
+    
+    public static StatView GetStatView()
+    {
+        return LoadFromResource<StatView>(PathUtils.statView);
+    }
+    
     #endregion
     
     #region Get Collection
@@ -135,6 +151,11 @@ public class LoadResourceController
         return LoadFromResource<ItemStatCollection>(PathUtils.itemStats);
     }
     
+    public static CharacterStatCollection GetCharacterStat()
+    {
+        return LoadFromResource<CharacterStatCollection>(PathUtils.characterStats);
+    }
+    
     public static DefineCollection GetDefineCollection()
     {
         return LoadFromResource<DefineCollection>(PathUtils.defineCollection);
@@ -144,7 +165,7 @@ public class LoadResourceController
     {
         return LoadFromResource<StatConfigCollection>(PathUtils.statConfig);
     }
-    
+
     public static UpgradeItemCollection GetUpgradeItemCollection()
     {
         return LoadFromResource<UpgradeItemCollection>(PathUtils.upgradeItem);
@@ -153,6 +174,16 @@ public class LoadResourceController
     public static SellItemCollection GetSellItemCollection()
     {
         return LoadFromResource<SellItemCollection>(PathUtils.sellItem);
+    }
+    
+    public static CharacterLevelCollection GetCharacterLevelCollection()
+    {
+        return LoadFromResource<CharacterLevelCollection>(PathUtils.characterLevel);
+    }
+    
+    public static CharacterStatConfigCollection GetCharacterConfigCollection()
+    {
+        return LoadFromResource<CharacterStatConfigCollection>(PathUtils.characterConfig);
     }
     #endregion
 }

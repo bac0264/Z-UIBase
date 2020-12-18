@@ -6,4 +6,7 @@ id,class_collection,class_data,asset_path
 5,ItemStatCollection,ItemStatData,Collection/item/item_stats
 6,StatConfigCollection,StatConfigData,Collection/item/stat_config
 7,SellItemCollection,SellItemData,Collection/item/sell_item
-7,UpgradeItemCollection,UpgradeItemData,Collection/item/upgrade_item
+8,UpgradeItemCollection,UpgradeItemData,Collection/item/upgrade_item
+9,CharacterStatCollection,CharacterStatData,Collection/character/character_stats
+10,CharacterStatConfigCollection,CharacterStatConfigData,Collection/character/character_config
+11,CharacterLevelCollection,CharacterLevelData,Collection/character/character_level

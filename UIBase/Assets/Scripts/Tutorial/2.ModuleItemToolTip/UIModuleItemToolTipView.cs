@@ -22,8 +22,7 @@ public class UIModuleItemToolTipView : MonoBehaviour
     [SerializeField] private MoneyBarView upgradeMoneyBar = null;
     
     [SerializeField] private GameObject nextStatsContainer;
-
-    [SerializeField] private ItemStatCollection itemStatCollection;
+    
     [SerializeField] private UpgradeItemCollection upgradeCollection;
     [SerializeField] private SellItemCollection sellCollection;
     
@@ -32,7 +31,6 @@ public class UIModuleItemToolTipView : MonoBehaviour
     private int index = 0;
     private void Awake()
     {
-        itemStatCollection = LoadResourceController.GetItemStat();
         upgradeCollection = LoadResourceController.GetUpgradeItemCollection();
         sellCollection = LoadResourceController.GetSellItemCollection();
         
@@ -59,29 +57,16 @@ public class UIModuleItemToolTipView : MonoBehaviour
 
         this.itemPick = itemPick;
 
-        var isMaxLevel = itemPick.level == upgradeCollection.dataGroups.maxLevel;
+        var isMaxLevel = itemPick.IsMaxLevel();
         var stats = "";
         var nextStats = "";
 
-        SetupStats(ref stats, ref nextStats, isMaxLevel);
+        itemPick.ReloadItemStats();
+
+        stats = itemPick.GetStatLocalize();
+        nextStats = itemPick.GetStatLocalizeNextLevel();
 
         SetupView(stats, nextStats, isMaxLevel);
-    }
-
-    private void SetupStats(ref string stats, ref string nextStats, bool isMaxLevel)
-    {
-        itemPick.itemStats = itemStatCollection.GetItemStatDataWithItemId(itemPick.id).GetItemStats(itemPick.level);
-        
-        for (int i = 0; i < itemPick.itemStats.Length; i++)
-        {
-            stats += itemPick.itemStats[i].GetLocalize() + "\n";
-
-            if (!isMaxLevel)
-            {
-                var nextLevel = itemPick.itemStats[i].GetStatNextLevel(itemPick.level);
-                nextStats += nextLevel.GetLocalize() + "\n";
-            }
-        }
     }
 
     private void SetupView(string stats, string nextStats, bool isMaxLevel)

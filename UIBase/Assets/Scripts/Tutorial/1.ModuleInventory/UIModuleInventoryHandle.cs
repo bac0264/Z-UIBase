@@ -6,7 +6,7 @@ public class UIModuleInventoryHandle : MonoBehaviour
 {
     [SerializeField] private UIModuleEquipmentView equipmentView;
     [SerializeField] private UIModuleInventoryView inventoryView;
-    
+    [SerializeField] private UIModuleCharacterInfoView characterInfoView;
     void Awake()
     {
         equipmentView.OnRightClickEvent = Unequip;
@@ -24,6 +24,7 @@ public class UIModuleInventoryHandle : MonoBehaviour
     {
         if (equipmentView.RemoveToUnequip(item, ()=>inventoryView.ReloadData()))
         {
+            characterInfoView.UpdateCharacterView();
             DataPlayer.PlayerInventory.Save();
         }
     }
@@ -33,6 +34,7 @@ public class UIModuleInventoryHandle : MonoBehaviour
         var inventoryId = item.inventoryId;
         if (equipmentView.AddToEquip(item, () => inventoryView.ReloadDataWithInventoryId(inventoryId)))
         {
+            characterInfoView.UpdateCharacterView();
             DataPlayer.PlayerInventory.Save();
         }
     }
@@ -44,5 +46,6 @@ public class UIModuleInventoryHandle : MonoBehaviour
         DataPlayer.PlayerCharacter.SetCurrentCharacter(index);
         equipmentView.RefreshUI();
         inventoryView.ReloadData();
+        characterInfoView.UpdateCharacterView();
     }
 }

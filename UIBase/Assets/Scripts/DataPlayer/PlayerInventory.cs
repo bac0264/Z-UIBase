@@ -47,8 +47,7 @@ public class PlayerInventory
         if (itemResource == null) return false;
 
         ItemResource resource = itemResource;
-        Debug.Log(resource.inventoryId);
-        Debug.Log("resouc econtainer: " + inventoryDic.ContainsKey(resource.inventoryId));
+        
         inventoryDic.Add(resource.inventoryId, resource);
         resourceList.AddData(resource);
 
