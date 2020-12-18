@@ -8,4 +8,5 @@ public class KeyUtils
     public const string INVENTORY_DATA = "INVENTORY_DATA";
     public const string CHARACTER_DATA = "CHARACTER_DATA";
     public const string SHOP_DATA = "SHOP_DATA";
+    public const string DAILY_REWARD_DATA = "DAILY_REWARD_DATA";
 }

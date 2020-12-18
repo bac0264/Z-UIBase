@@ -18,7 +18,7 @@ public static class DataPlayer
     private static PlayerInventory _playerInventory;
     private static PlayerCharacter _playerCharacter;
     private static PlayerShop _playerShop;
-    
+    private static PlayerDailyReward _playerDailyReward;
     #region Set Get
     public static PlayerMoney PlayerMoney 
     {
@@ -53,6 +53,15 @@ public static class DataPlayer
         {
             if (_playerShop == null) _playerShop = new PlayerShop();
             return _playerShop;
+        }
+    }
+    
+    public static PlayerDailyReward PlayerDailyReward 
+    {
+        get
+        {
+            if (_playerDailyReward == null) _playerDailyReward = new PlayerDailyReward();
+            return _playerDailyReward;
         }
     }
     #endregion

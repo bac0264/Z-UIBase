@@ -19,6 +19,7 @@ public class PathUtils
     public const string iconView = "Prefabs/icon_view";
     public const string moneyBarView = "Prefabs/money_bar_view";
     public const string statView = "Prefabs/stat_view";
+    public const string dailyRewardView = "Prefabs/daily_reward_view";
     
     public const string defineCollection = "Collection/define_collection";
         
@@ -33,4 +34,6 @@ public class PathUtils
     public const string characterStats = "Collection/character/character_stats";
     public const string characterConfig = "Collection/character/character_config";
     public const string characterLevel = "Collection/character/character_level";
+
+    public const string dailyReward = "Collection/daily_reward/daily_reward";
 }

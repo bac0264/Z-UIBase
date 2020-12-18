@@ -132,6 +132,11 @@ public class LoadResourceController
         return LoadFromResource<StatView>(PathUtils.statView);
     }
     
+    public static DailyRewardView GetDailyRewardView()
+    {
+        return LoadFromResource<DailyRewardView>(PathUtils.dailyRewardView);
+    }
+    
     #endregion
     
     #region Get Collection
@@ -184,6 +189,11 @@ public class LoadResourceController
     public static CharacterStatConfigCollection GetCharacterConfigCollection()
     {
         return LoadFromResource<CharacterStatConfigCollection>(PathUtils.characterConfig);
+    }
+    
+    public static DailyRewardCollection GetDailyReward()
+    {
+        return LoadFromResource<DailyRewardCollection>(PathUtils.dailyReward);
     }
     #endregion
 }

@@ -10,3 +10,4 @@ id,class_collection,class_data,asset_path
 9,CharacterStatCollection,CharacterStatData,Collection/character/character_stats
 10,CharacterStatConfigCollection,CharacterStatConfigData,Collection/character/character_config
 11,CharacterLevelCollection,CharacterLevelData,Collection/character/character_level
+12,DailyRewardCollection,DailyRewardData,Collection/daily_reward/daily_reward

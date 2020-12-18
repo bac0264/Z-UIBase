@@ -16,7 +16,6 @@ public class UIModuleInventoryHandle : MonoBehaviour
     private void OnValidate()
     {
         if (equipmentView == null) equipmentView = transform.GetComponentInChildren<UIModuleEquipmentView>();
-
         if (inventoryView == null) inventoryView = transform.GetComponentInChildren<UIModuleInventoryView>();
     }
 

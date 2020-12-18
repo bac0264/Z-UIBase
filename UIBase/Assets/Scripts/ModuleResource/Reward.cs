@@ -43,7 +43,7 @@ public class Reward : IRecieveReward
         }
         else if (resType == (int) ResourceType.CharacterType)
         {
-
+            DataPlayer.PlayerCharacter.AddCharacter(CharacterResource.CreateInstance(resType, resId, resNumber));
         }
         else
         {
