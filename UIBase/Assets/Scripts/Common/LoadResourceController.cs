@@ -98,6 +98,15 @@ public class LoadResourceController
 
         return null;
     }
+    public static Sprite GetGachaBackground(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.backgroundGacha, id));
+    }
+    
+    public static Sprite GetGachaIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconGachas, id));
+    }
     
     public static Sprite GetStatIcon(int id)
     {
@@ -142,6 +151,10 @@ public class LoadResourceController
         return LoadFromResource<TimeBarView>(PathUtils.timeBarView);
     }
     
+    public static GachaTab GetGachaTab()
+    {
+        return LoadFromResource<GachaTab>(PathUtils.gachaTab);
+    }
     #endregion
     
     #region Get Collection
@@ -199,6 +212,11 @@ public class LoadResourceController
     public static DailyRewardCollection GetDailyReward()
     {
         return LoadFromResource<DailyRewardCollection>(PathUtils.dailyReward);
+    }
+    
+    public static GachaCollection GetGachaConfigCollection()
+    {
+        return LoadFromResource<GachaCollection>(PathUtils.gachaConfig);
     }
     #endregion
 }

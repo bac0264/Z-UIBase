@@ -61,3 +61,7 @@ MonoBehaviour:
     classCollection: DailyRewardCollection
     classData: DailyRewardData
     assetPath: Collection/daily_reward/daily_reward
+  - id: 13
+    classCollection: GachaCollection
+    classData: GachaData
+    assetPath: Collection/gacha/gacha_config

@@ -58,6 +58,7 @@ public class ItemResource : Resource
 
     public void ReloadItemStats()
     {
+        Debug.Log("id: "+id);
         itemStats = itemStatCollection.GetItemStatDataWithItemId(id).GetItemStats(level);
     }
 
