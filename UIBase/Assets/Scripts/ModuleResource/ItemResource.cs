@@ -43,14 +43,10 @@ public class ItemResource : Resource
         this.inventoryId = inventoryId;
         
         if (upgradeItemCollection == null)
-        {
             upgradeItemCollection = LoadResourceController.GetUpgradeItemCollection();
-        }
-        
+
         if (itemStatCollection == null)
-        {
             itemStatCollection = LoadResourceController.GetItemStat();
-        }
 
         ReloadItemStats();
     }
