@@ -137,6 +137,11 @@ public class LoadResourceController
         return LoadFromResource<DailyRewardView>(PathUtils.dailyRewardView);
     }
     
+    public static TimeBarView GetTimeBarView()
+    {
+        return LoadFromResource<TimeBarView>(PathUtils.timeBarView);
+    }
+    
     #endregion
     
     #region Get Collection

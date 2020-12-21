@@ -63,7 +63,7 @@ public class PlayerInventory
 
         inventoryDic.Add(resource.inventoryId, resource);
         resourceList.AddNewData(resource);
-
+        Save();
         return true;
     }
 

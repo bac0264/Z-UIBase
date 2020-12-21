@@ -1,8 +1,8 @@
 id,res_type,res_id,res_number,stock,cost,packname_iap,free,stock_free
 1,1,1001,10,2,19.99,bundle1,TRUE,4
 ,1,1002,1,,,,,
-,2,30,5,,,,,
-,0,30,5,,,,,
+,2,0,5,,,,,
+,0,0,5,,,,,
 2,2,0,5,-1,29.99,bundle2,,
 ,2,1,1,,,,,
 ,2,2,5,,,,,

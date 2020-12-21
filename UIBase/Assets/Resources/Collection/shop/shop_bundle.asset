@@ -22,10 +22,10 @@ MonoBehaviour:
       resId: 1002
       resNumber: 1
     - resType: 2
-      resId: 30
+      resId: 0
       resNumber: 5
     - resType: 0
-      resId: 30
+      resId: 0
       resNumber: 5
     stock: 2
     cost: 19.99

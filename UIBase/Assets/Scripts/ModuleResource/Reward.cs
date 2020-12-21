@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Reward : IRecieveReward
@@ -49,5 +50,24 @@ public class Reward : IRecieveReward
         {
 
         }
+    }
+
+    public static Reward[] FixDuplicateRewards(List<Reward> rewardList)
+    {
+        List<Reward> rewards = new List<Reward>();
+        for (int i = 0; i < rewardList.Count; i++)
+        {
+            for (int j = rewardList.Count - 1; j >= 0 && i != j; j--)
+            {
+                if (rewardList[i].resType == rewardList[j].resType && rewardList[i].resId == rewardList[j].resId)
+                {
+                    rewardList[i].resNumber += rewardList[j].resNumber;
+                    rewardList.Remove(rewardList[j]);
+                }
+            }
+            rewards.Add(rewardList[i]);
+        }
+
+        return rewards.ToArray();
     }
 }

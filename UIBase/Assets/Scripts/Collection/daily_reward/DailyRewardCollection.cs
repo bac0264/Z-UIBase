@@ -16,17 +16,39 @@ public class DailyRewardData
     public Reward[] rewards;
 
     private PlayerDailyReward playerDailyReward = null;
-    
-    public bool IsReceived()
+
+    private void SetupController()
     {
         if (playerDailyReward == null) playerDailyReward = DataPlayer.PlayerDailyReward;
+    }
+
+    public bool IsReceived()
+    {
+        SetupController();
+        
         return playerDailyReward.IsReceived(id);
     }
     
     public bool IsReceivable()
     {
-        if (playerDailyReward == null) playerDailyReward = DataPlayer.PlayerDailyReward;
-        return (id - 1) <= playerDailyReward.GetCurrentDay();
+        SetupController();
+        return id <= playerDailyReward.GetCurrentDay();
+    }
+    
+    public bool IsNextDay()
+    {
+        SetupController();
+        return playerDailyReward.IsNextDay(id - 1);
+    }
+
+    public void Claim()
+    {
+        SetupController();
+        for (int i = 0; i < rewards.Length; i++)
+        {
+            rewards[i].RecieveReward();
+        }
+        playerDailyReward.AddDayReceived(id);
     }
 }
 

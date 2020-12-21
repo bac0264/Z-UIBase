@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PathUtils
 {
+    public const string windowPath = "Windows/{0}";
+    
     public const string iconItems= "IconItems/{0}";
     public const string iconFrames = "IconFrames/{0}";
     public const string iconCharacters = "IconCharacters/{0}";
@@ -20,6 +22,7 @@ public class PathUtils
     public const string moneyBarView = "Prefabs/money_bar_view";
     public const string statView = "Prefabs/stat_view";
     public const string dailyRewardView = "Prefabs/daily_reward_view";
+    public const string timeBarView = "Prefabs/time_bar_view";
     
     public const string defineCollection = "Collection/define_collection";
         
