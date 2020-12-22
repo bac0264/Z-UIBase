@@ -6,20 +6,20 @@ public class CharacterLevelCollection : ScriptableObject
 {
     public CharacterLevelData[] dataGroups;
 
-    public int GetCurrentLevel(long exp)
+    public CharacterLevelData GetCharacterLevelData(int level)
     {
-        var level = 0;
         for (int i = 0; i < dataGroups.Length; i++)
         {
-            if (exp < dataGroups[i].exp)
-            {
-                return level;
-            }
-
-            level = i;
+            if (level == dataGroups[i].level)
+                return dataGroups[i];
         }
+        
+         return null;
+    }
 
-        return level;
+    public int GetMaxLevel()
+    {
+        return dataGroups.Length;
     }
 }
 
@@ -27,5 +27,19 @@ public class CharacterLevelCollection : ScriptableObject
 public class CharacterLevelData
 {
     public int level;
-    public long exp;
+    public Reward[] rewardDatas;
+
+    private Resource[] resources = null;
+    public Resource[] GetResources()
+    {
+        var _resources = new List<Resource>();
+
+        for (int i = 0; i < rewardDatas.Length; i++)
+        {
+            _resources.Add(rewardDatas[i].GetResource());
+        }
+
+        resources = _resources.ToArray();
+        return resources;
+    }
 }

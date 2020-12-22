@@ -24,8 +24,11 @@ public class UIShopRawPackView : MonoBehaviour
 
     [SerializeField] private int id;
 
+    private PlayerShop playerShop = null; 
     private void Awake()
     {
+        playerShop = DataPlayer.GetModule<PlayerShop>();
+        
         InitButtons();
         InitLocalize();
     }
@@ -44,13 +47,13 @@ public class UIShopRawPackView : MonoBehaviour
 
     private void RefreshUI()
     {
-        var isFree = info.free && DataPlayer.PlayerShop.IsAvailableForBuying(ShopEnum.RAW_PACK_FREE, id, info.stockFree);
+        var isFree = info.free && playerShop.IsAvailableForBuying(ShopEnum.RAW_PACK_FREE, id, info.stockFree);
         
         freeBtn.gameObject.SetActive(isFree);
         purchaseBtn.gameObject.SetActive(!isFree);
 
-        freeCountTxt.text = DataPlayer.PlayerShop.GetBoughtCount(ShopEnum.RAW_PACK_FREE, id).ToString() +"/" + info.stockFree;
-        boughtCountTxt.text = DataPlayer.PlayerShop.GetBoughtCount(ShopEnum.RAW_PACK, id).ToString();
+        freeCountTxt.text = playerShop.GetBoughtCount(ShopEnum.RAW_PACK_FREE, id).ToString() +"/" + info.stockFree;
+        boughtCountTxt.text = playerShop.GetBoughtCount(ShopEnum.RAW_PACK, id).ToString();
     }
     
     private void InitButtons()
@@ -69,7 +72,7 @@ public class UIShopRawPackView : MonoBehaviour
         void onSuccess()
         {
             Debug.Log(" ironsource success");
-            DataPlayer.PlayerShop.AddBought(ShopEnum.RAW_PACK_FREE, id);
+            playerShop.AddBought(ShopEnum.RAW_PACK_FREE, id);
             AddRewards();
         }
 
@@ -81,7 +84,7 @@ public class UIShopRawPackView : MonoBehaviour
         void onSuccess()
         {
             Debug.Log(" IAP success");
-            DataPlayer.PlayerShop.AddBought(ShopEnum.RAW_PACK, id);
+            playerShop.AddBought(ShopEnum.RAW_PACK, id);
             AddRewards();
 
         }

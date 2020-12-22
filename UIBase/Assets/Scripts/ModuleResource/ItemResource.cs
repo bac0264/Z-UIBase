@@ -58,7 +58,6 @@ public class ItemResource : Resource
 
     public void ReloadItemStats()
     {
-        Debug.Log("id: "+id);
         itemStats = itemStatCollection.GetItemStatDataWithItemId(id).GetItemStats(level);
     }
 
@@ -68,7 +67,7 @@ public class ItemResource : Resource
     }
     public int GetPriority()
     {
-        return id % 1000;
+        return id % GameConstant.ITEM_ID_CONSTANT;
     }
 
     public string GetStatLocalize(string option = "\n")

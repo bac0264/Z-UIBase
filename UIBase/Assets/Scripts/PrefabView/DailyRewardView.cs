@@ -71,7 +71,7 @@ public class DailyRewardView : MonoBehaviour
 
         if (isNextDay)
         {
-            var lastTimeOnline = DataPlayer.PlayerDailyReward.GetLastTimeOnline();
+            var lastTimeOnline = DataPlayer.GetModule<PlayerDailyReward>().GetLastTimeOnline();
             timeCountDownAction?.Invoke(dailyRewardData.id - 1, lastTimeOnline, isCompleted);
         }
     }

@@ -1,26 +1,33 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 
-public enum DataPlayerType
-{
-    
-}
+// public enum DataPlayerType
+// {
+//     PlayerMoney,
+//     PlayerInventory,
+//     PlayerCharacter,
+//     PlayerShop,
+//     PlayerDailyReward,
+//     PlayerGacha,
+//     PlayerAds,
+// }
+
 public static class DataPlayer
 {
-    // public static readonly Dictionary<DataPlayerType, object>
-    //     ResgisteredModules = new Dictionary<DataPlayerType, object>();
-    
+    #region Set Get
     private static PlayerMoney _playerMoney;
     private static PlayerInventory _playerInventory;
     private static PlayerCharacter _playerCharacter;
     private static PlayerShop _playerShop;
     private static PlayerDailyReward _playerDailyReward;
-    #region Set Get
-    public static PlayerMoney PlayerMoney 
+    private static PlayerGacha _playerGacha;
+    private static PlayerAds _playerAds;
+
+    
+    public static PlayerMoney PlayerMoney
     {
         get
         {
@@ -29,7 +36,7 @@ public static class DataPlayer
         }
     }
     
-    public static PlayerInventory PlayerInventory 
+    public static PlayerInventory PlayerInventory
     {
         get
         {
@@ -37,8 +44,8 @@ public static class DataPlayer
             return _playerInventory;
         }
     }
-
-    public static PlayerCharacter PlayerCharacter 
+    
+    public static PlayerCharacter PlayerCharacter
     {
         get
         {
@@ -47,7 +54,7 @@ public static class DataPlayer
         }
     }
     
-    public static PlayerShop PlayerShop 
+    public static PlayerShop PlayerShop
     {
         get
         {
@@ -56,7 +63,7 @@ public static class DataPlayer
         }
     }
     
-    public static PlayerDailyReward PlayerDailyReward 
+    public static PlayerDailyReward PlayerDailyReward
     {
         get
         {
@@ -64,36 +71,96 @@ public static class DataPlayer
             return _playerDailyReward;
         }
     }
+    
+    public static PlayerGacha PlayerGacha
+    {
+        get
+        {
+            if (_playerGacha == null) _playerGacha = new PlayerGacha();
+            return _playerGacha;
+        }
+    }
+    
     #endregion
 
-    // private static void GetModule(DataPlayerType dataPlayerType, Type moduleType)
+    #region Option1
+    private static readonly Dictionary<Type, object>
+        ResgisteredModules = new Dictionary<Type, object>();
+    
+    public static T GetModule<T>()
+    {
+        return (T) _GetModule(typeof(T));
+    }
+
+    private static object _GetModule(Type moduleType)
+    {
+        if (ResgisteredModules.ContainsKey(moduleType))
+        {
+            return ResgisteredModules[moduleType];
+        }
+
+        var firstConstructor = moduleType.GetConstructors()[0];
+        
+        object module = null;
+        
+        if (!firstConstructor.GetParameters().Any())
+        {
+            module = firstConstructor.Invoke(null);
+        }
+        else
+        {
+            Debug.Log("!! Warning, Not support Constructor with params");
+        }
+        
+        ResgisteredModules.Add(moduleType, module);
+        return module;
+    }
+    #endregion
+    
+    #region Option2
+    //
+    // private static readonly Dictionary<DataPlayerType, object>
+    //     ResgisteredModules2 = new Dictionary<DataPlayerType, object>();
+    // public static T GetModule2<T>(DataPlayerType dataPlayerType)
     // {
-    //     if (ResgisteredModules.ContainsKey(dataPlayerType))
+    //     if (typeof(T).ToString().Equals(dataPlayerType.ToString()))
+    //         return (T) _GetModule2(dataPlayerType);
+    //     return default;
+    // }
+    //
+    // private static object _GetModule2(DataPlayerType dataPlayerType)
+    // {
+    //     if (ResgisteredModules2.ContainsKey(dataPlayerType))
     //     {
-    //         return 
+    //         return ResgisteredModules2[dataPlayerType];
     //     }
-    //     //Tìm constructor đầu tiên
+    //
+    //     Type moduleType = Type.GetType(dataPlayerType.ToString());
+    //     
     //     var firstConstructor = moduleType.GetConstructors()[0];
+    //     
     //     object module = null;
-    //     //Nếu như không có tham số
+    //     
     //     if (!firstConstructor.GetParameters().Any())
     //     {
-    //         //Khởi tạo module
-    //         module = firstConstructor.Invoke(null); // nếu có constructor con khởi tạo dữ liệu bên trong firstCons
+    //         module = firstConstructor.Invoke(null);
     //     }
     //     else
     //     {
     //         Debug.Log("!! Warning, Not support Constructor with params");
     //     }
-    //     //Lưu trữ interface và module tương ứng
-    //     ResgisteredModules.Add(dataPlayerType, module);
+    //     
+    //     ResgisteredModules2.Add(dataPlayerType, module);
+    //     return module;
     // }
+     #endregion
 }
 
 [System.Serializable]
 public class DataSave<T>
 {
     public List<T> dataList;
+
     public DataSave()
     {
         dataList = new List<T>();
@@ -103,7 +170,7 @@ public class DataSave<T>
     {
         dataList.Add(t);
     }
-    
+
     public virtual void RemoveData(T t)
     {
         dataList.Remove(t);

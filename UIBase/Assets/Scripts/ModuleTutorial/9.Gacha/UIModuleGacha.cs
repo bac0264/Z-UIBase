@@ -14,7 +14,7 @@ public class UIModuleGacha : MonoBehaviour
     private GachaData currentGacha = null;
 
     private GachaCollection collection;
-    private void Awake()
+    private void Start()
     {
         collection = LoadResourceController.GetGachaConfigCollection();
         prefab = LoadResourceController.GetGachaTab();
@@ -28,6 +28,7 @@ public class UIModuleGacha : MonoBehaviour
         {
             var z = i;
             if (z == 0) currentGacha = collection.dataGroups[z];
+            
             if (i < gachaTabList.Count)
             {
                 gachaTabList[z].SetupAction(collection.dataGroups[z], ShowLayout);
@@ -39,11 +40,11 @@ public class UIModuleGacha : MonoBehaviour
                 gachaTabList.Add(tab);
             }
         }
-        layout.SetupView(currentGacha);
+        layout.UpdateView(currentGacha);
     }
 
     private void ShowLayout(GachaData data)
     {
-        layout.SetupView(data);
+        layout.UpdateView(data);
     }
 }

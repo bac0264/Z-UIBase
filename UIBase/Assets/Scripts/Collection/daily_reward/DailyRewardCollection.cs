@@ -19,7 +19,7 @@ public class DailyRewardData
 
     private void SetupController()
     {
-        if (playerDailyReward == null) playerDailyReward = DataPlayer.PlayerDailyReward;
+        if (playerDailyReward == null) playerDailyReward = DataPlayer.GetModule<PlayerDailyReward>();
     }
 
     public bool IsReceived()

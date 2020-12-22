@@ -14,12 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataGroups:
   - id: 1
+    consumeGachas:
+    - resType: 0
+      resId: 10
+      resNumber: 1
+    - resType: 0
+      resId: 10
+      resNumber: 10
+    timeConfig: 20
     minId: 1
     maxId: 5
     rate1: 70
     rate2: 90
     rate3: 100
   - id: 2
+    consumeGachas:
+    - resType: 0
+      resId: 11
+      resNumber: 1
+    - resType: 0
+      resId: 11
+      resNumber: 100
+    timeConfig: 20
     minId: 1
     maxId: 5
     rate1: 0

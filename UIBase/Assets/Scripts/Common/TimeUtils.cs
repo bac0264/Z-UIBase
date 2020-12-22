@@ -39,6 +39,25 @@ public static class TimeUtils
         return rangeTime + 1;
     }
     
+    
+    public static long GetGachaTime(long lastTimeGacha, long timeConfig, long currentTime)
+    {
+        var endTime = lastTimeGacha + timeConfig;
+        long rangeTime = currentTime - endTime;
+        return rangeTime;
+    }
+    
+    public static IEnumerator TimeGachaCoundown(Text timeTxt, long rangeTime, Action callBack = null)
+    {
+        while (rangeTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            rangeTime--;
+            timeTxt.text = ToTimeSpanString(rangeTime);
+        }
+        
+        callBack?.Invoke();
+    }
     public static long GetTimeADay()
     {
         return 86400;

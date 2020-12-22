@@ -11,8 +11,11 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Ins = null;
     public DateTime currentTime;
 
-    private bool check;
-    
+    public bool check;
+
+    private Coroutine startTime = null;
+
+    private PlayerDailyReward dataReward = null;
     //make sure there is only one instance of this always.
     void Awake()
     {
@@ -24,7 +27,10 @@ public class TimeManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         //DontDestroyOnLoad(gameObject);
+        UpdateTime();
+        dataReward = DataPlayer.GetModule<PlayerDailyReward>();
     }
 
     public void UpdateTime(Action callBack = null)
@@ -38,7 +44,7 @@ public class TimeManager : MonoBehaviour
         {
             if (currentTime.TotalSecondTimeStamp() > 1000 && check)
             {
-                DataPlayer.PlayerDailyReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+                dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
             }
         }
     }
@@ -47,7 +53,7 @@ public class TimeManager : MonoBehaviour
     {
         if (currentTime.TotalSecondTimeStamp() > 1000 && check)
         {
-            DataPlayer.PlayerDailyReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+            dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
         }
     }
 
@@ -55,8 +61,9 @@ public class TimeManager : MonoBehaviour
     {
         if (currentTime.TotalSecondTimeStamp() > 1000 && check)
         {
-            DataPlayer.PlayerDailyReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
-            StartCoroutine(TimeCountDown());
+            dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+            if (startTime == null)
+                startTime = StartCoroutine(TimeCountDown());
         }
     }
 
@@ -103,14 +110,14 @@ public class TimeManager : MonoBehaviour
                 check = true;
             }
         }
-        
+
         callBack?.Invoke(check);
         callBack2?.Invoke();
     }
 
     public void Add1Day()
     {
-        DataPlayer.PlayerDailyReward.Add1Day();
+        dataReward.Add1Day();
         SceneManager.LoadScene("5.DailyReward");
     }
 

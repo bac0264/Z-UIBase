@@ -23,6 +23,8 @@ public class GachaCollection : ScriptableObject
 public class GachaData
 {
     public int id;
+    public Reward[] consumeGachas;
+    public long timeConfig;
     public int minId;
     public int maxId;
     public int rate1;
@@ -40,7 +42,7 @@ public class GachaData
     private Reward GetReward()
     {
         var rewards = new List<Reward>();
-        var id = UnityEngine.Random.Range(minId, maxId) * 1000;
+        var id = UnityEngine.Random.Range(minId, maxId) * GameConstant.ITEM_ID_CONSTANT;
         var temp = UnityEngine.Random.Range(1, rate3);
         if (temp > 0 && temp <= rate1)
         {
@@ -67,6 +69,21 @@ public class GachaData
         }
 
         return rewardList.ToArray();
+    }
+
+    public Reward GetRequireGacha1()
+    {
+        return consumeGachas[0];
+    }
+
+    public Reward GetRequireGacha10()
+    {
+        return consumeGachas[1];
+    }
+
+    public long GetTimeConfig()
+    {
+        return timeConfig;
     }
 }
 

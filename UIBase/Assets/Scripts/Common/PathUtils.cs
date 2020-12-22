@@ -38,4 +38,5 @@ public class PathUtils
     public const string characterLevel = "Collection/character/character_level";
     public const string dailyReward = "Collection/daily_reward/daily_reward";
     public const string gachaConfig = "Collection/gacha/gacha_config";
+    public const string adsConfig = "Collection/ads/ads_config";
 }

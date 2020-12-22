@@ -70,9 +70,10 @@ public class PlayerMoney
         Save();
     }
 
-    public void SubManyMoney(List<Resource> dataList)
+    public void SubManyMoney(Resource[] dataList)
     {
-        for (int i = 0; i < dataList.Count; i++)
+        Debug.Log("data: "+dataList.Length);
+        for (int i = 0; i < dataList.Length; i++)
         {
             MoneyType id = (MoneyType) dataList[i].id;
             if (resourceDic.ContainsKey(id))
@@ -116,6 +117,19 @@ public class PlayerMoney
         return false;
     }
 
+    public bool IsEnoughManyMoney(Resource[] requireResource)
+    {
+        for (int i = 0; i < requireResource.Length; i++)
+        {
+            var myMoney = GetMoney((MoneyType) requireResource[i].id);
+            if (myMoney.number - requireResource[i].number < 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<Resource> GetMoneyList()
     {
         return resourceList.dataList;
@@ -127,15 +141,17 @@ public class PlayerMoney
         if (resourceList == null)
         {
             resourceList = new DataSave<Resource>();
+            AddOne(MoneyType.Gem, 100000);
+            AddOne(MoneyType.Gold, 100000);
+            AddOne(MoneyType.KeyBasic, 100000);
+            AddOne(MoneyType.KeyPremium, 100000);
         }
 
         for (int i = 0; i < resourceList.dataList.Count; i++)
         {
-            resourceDic.Add((MoneyType) resourceList.dataList[i].id, resourceList.dataList[i]);
+            if (!resourceDic.ContainsKey((MoneyType) resourceList.dataList[i].id))
+                resourceDic.Add((MoneyType) resourceList.dataList[i].id, resourceList.dataList[i]);
         }
-
-        AddOne(MoneyType.GEM, 100000);
-        AddOne(MoneyType.GOLD, 100000);
     }
 
     public void Save()
@@ -145,6 +161,6 @@ public class PlayerMoney
 
     public static int GetRealItemId(int id)
     {
-        return id / 1000;
+        return id / GameConstant.ITEM_ID_CONSTANT;
     }
 }

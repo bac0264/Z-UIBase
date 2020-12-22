@@ -7,10 +7,15 @@ public class UIModuleInventoryHandle : MonoBehaviour
     [SerializeField] private UIModuleEquipmentView equipmentView;
     [SerializeField] private UIModuleInventoryView inventoryView;
     [SerializeField] private UIModuleCharacterInfoView characterInfoView;
+
+    private PlayerInventory playerInventory = null;
+    private PlayerCharacter playerCharacter = null;
     void Awake()
     {
         equipmentView.OnRightClickEvent = Unequip;
         inventoryView.OnRightClickEvent = Equip;
+        playerInventory = DataPlayer.GetModule<PlayerInventory>();
+        playerCharacter = DataPlayer.GetModule<PlayerCharacter>();
     }
 
     private void OnValidate()
@@ -24,7 +29,7 @@ public class UIModuleInventoryHandle : MonoBehaviour
         if (equipmentView.RemoveToUnequip(item, ()=>inventoryView.ReloadData()))
         {
             characterInfoView.UpdateCharacterView();
-            DataPlayer.PlayerInventory.Save();
+            playerInventory.Save();
         }
     }
 
@@ -34,15 +39,15 @@ public class UIModuleInventoryHandle : MonoBehaviour
         if (equipmentView.AddToEquip(item, () => inventoryView.ReloadDataWithInventoryId(inventoryId)))
         {
             characterInfoView.UpdateCharacterView();
-            DataPlayer.PlayerInventory.Save();
+            playerInventory.Save();
         }
     }
 
     public void RefreshUI()
     {
-        var index = DataPlayer.PlayerCharacter.GetCurrentCharacter().characterId + 1;
+        var index = playerCharacter.GetCurrentCharacter().characterId + 1;
         if (index > 5) index = 0;
-        DataPlayer.PlayerCharacter.SetCurrentCharacter(index);
+        playerCharacter.SetCurrentCharacter(index);
         equipmentView.RefreshUI();
         inventoryView.ReloadData();
         characterInfoView.UpdateCharacterView();

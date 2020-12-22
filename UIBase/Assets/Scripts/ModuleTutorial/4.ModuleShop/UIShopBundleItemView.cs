@@ -20,9 +20,11 @@ public class UIShopBundleItemView : MonoBehaviour
 
     private BundlePackInfo info;
 
+    private PlayerShop playerShop = null;
     private int id;
     private void Awake()
     {
+        playerShop = DataPlayer.GetModule<PlayerShop>();
         InitLocalize();
         InitButtons();
     }
@@ -41,7 +43,7 @@ public class UIShopBundleItemView : MonoBehaviour
     {
         purchaseBtn.gameObject.SetActive(true);
         
-        boughtCountTxt.text = DataPlayer.PlayerShop.GetBoughtCount(ShopEnum.BUNDLE, id).ToString();
+        boughtCountTxt.text = playerShop.GetBoughtCount(ShopEnum.BUNDLE, id).ToString();
     }
     
     public void InitView(BundlePackInfo info, int id)
@@ -67,7 +69,7 @@ public class UIShopBundleItemView : MonoBehaviour
         void onSuccess()
         {
             Debug.Log(" IAP success");
-            DataPlayer.PlayerShop.AddBought(ShopEnum.BUNDLE, id);
+            playerShop.AddBought(ShopEnum.BUNDLE, id);
             AddRewards();
         }
         

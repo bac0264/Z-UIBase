@@ -70,13 +70,13 @@ public class PlayerCharacter
         return true;
     }
 
-    public void AddHeroExpWithId(int characterId, long value)
-    {
-        if (inventoryDic.ContainsKey(characterId))
-        {
-            inventoryDic[characterId].AddExp(value);
-        }
-    }
+    // public void AddHeroExpWithId(int characterId, long value)
+    // {
+    //     if (inventoryDic.ContainsKey(characterId))
+    //     {
+    //         inventoryDic[characterId].AddExp(value);
+    //     }
+    // }
     
     public void SetCurrentCharacter(int characterId)
     {

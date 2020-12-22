@@ -13,101 +13,252 @@ MonoBehaviour:
   m_Name: character_level
   m_EditorClassIdentifier: 
   dataGroups:
-  - level: 0
-    exp: 0
   - level: 1
-    exp: 50
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 100
+    - resType: 0
+      resId: 0
+      resNumber: 150
   - level: 2
-    exp: 100
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 150
+    - resType: 0
+      resId: 0
+      resNumber: 150
   - level: 3
-    exp: 150
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 200
   - level: 4
-    exp: 200
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 250
+    - resType: 0
+      resId: 0
+      resNumber: 150
   - level: 5
-    exp: 250
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 300
   - level: 6
-    exp: 300
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 350
   - level: 7
-    exp: 350
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 400
   - level: 8
-    exp: 400
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 450
   - level: 9
-    exp: 450
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 500
   - level: 10
-    exp: 500
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 550
   - level: 11
-    exp: 550
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 600
   - level: 12
-    exp: 600
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 650
   - level: 13
-    exp: 650
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 700
   - level: 14
-    exp: 700
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 750
   - level: 15
-    exp: 750
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 800
   - level: 16
-    exp: 800
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 850
   - level: 17
-    exp: 850
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 900
   - level: 18
-    exp: 900
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 950
   - level: 19
-    exp: 950
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1000
   - level: 20
-    exp: 1000
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1050
   - level: 21
-    exp: 1050
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1100
   - level: 22
-    exp: 1100
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1150
   - level: 23
-    exp: 1150
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1200
   - level: 24
-    exp: 1200
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1250
   - level: 25
-    exp: 1250
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1300
   - level: 26
-    exp: 1300
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1350
   - level: 27
-    exp: 1350
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1400
   - level: 28
-    exp: 1400
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1450
   - level: 29
-    exp: 1450
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1500
   - level: 30
-    exp: 1500
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1550
   - level: 31
-    exp: 1550
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1600
   - level: 32
-    exp: 1600
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1650
   - level: 33
-    exp: 1650
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1700
   - level: 34
-    exp: 1700
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1750
   - level: 35
-    exp: 1750
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1800
   - level: 36
-    exp: 1800
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1850
   - level: 37
-    exp: 1850
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1900
   - level: 38
-    exp: 1900
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 1950
   - level: 39
-    exp: 1950
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2000
   - level: 40
-    exp: 2000
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2050
   - level: 41
-    exp: 2050
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2100
   - level: 42
-    exp: 2100
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2150
   - level: 43
-    exp: 2150
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2200
   - level: 44
-    exp: 2200
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2250
   - level: 45
-    exp: 2250
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2300
   - level: 46
-    exp: 2300
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2350
   - level: 47
-    exp: 2350
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 2400
   - level: 48
-    exp: 2400
+    rewardDatas:
+    - resType: 0
+      resId: 1
+      resNumber: 0

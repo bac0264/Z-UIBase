@@ -20,10 +20,13 @@ public enum ItemType
 
 public enum MoneyType
 {
-    NONE = -1,
-    GOLD = 0,
-    GEM = 1,
+    None = -1,
+    Gold = 0,
+    Gem = 1,
     
+    KeyBasic = 10,
+    KeyPremium = 11,
+
 }
 
 [System.Serializable]

@@ -28,9 +28,15 @@ public class UIModuleItemToolTipView : MonoBehaviour
     
     [SerializeField] private ItemResource itemPick;
 
+    private PlayerMoney playerMoney;
+    private PlayerInventory playerInventory;
+
     private int index = 0;
     private void Awake()
     {
+        playerMoney = DataPlayer.GetModule<PlayerMoney>();
+        playerInventory = DataPlayer.GetModule<PlayerInventory>();
+        
         upgradeCollection = LoadResourceController.GetUpgradeItemCollection();
         sellCollection = LoadResourceController.GetSellItemCollection();
         
@@ -90,14 +96,14 @@ public class UIModuleItemToolTipView : MonoBehaviour
         // 
         var goldUpgrade = upgradeCollection.dataGroups.GetPrice(itemPick.level).number;
 
-        if (DataPlayer.PlayerMoney.IsEnoughMoney(Resource.CreateInstance((int) ResourceType.MoneyType,
-            (int) MoneyType.GOLD,
+        if (playerMoney.IsEnoughMoney(Resource.CreateInstance((int) ResourceType.MoneyType,
+            (int) MoneyType.Gold,
             goldUpgrade)) && itemPick != null && itemPick.level < upgradeCollection.dataGroups.maxLevel)
         {
             itemPick.level += 1;
 
-            DataPlayer.PlayerMoney.SubOne(MoneyType.GOLD, goldUpgrade);
-            DataPlayer.PlayerInventory.Save();
+            playerMoney.SubOne(MoneyType.Gold, goldUpgrade);
+            playerInventory.Save();
 
             UpdateView(itemPick);
         }
@@ -109,9 +115,9 @@ public class UIModuleItemToolTipView : MonoBehaviour
 
         if (itemPick != null)
         {
-            DataPlayer.PlayerInventory.RemoveItem(itemPick);
-            DataPlayer.PlayerInventory.Save();
-            DataPlayer.PlayerMoney.AddOne(MoneyType.GOLD, goldSell);
+            playerInventory.RemoveItem(itemPick);
+            playerInventory.Save();
+            playerMoney.AddOne(MoneyType.Gold, goldSell);
 
             NextItem();
         }
@@ -119,7 +125,7 @@ public class UIModuleItemToolTipView : MonoBehaviour
 
     private void NextItem()
     {
-        UpdateView(DataPlayer.PlayerInventory.GetItem(index));
+        UpdateView(playerInventory.GetItem(index));
         index++;
     }
 }

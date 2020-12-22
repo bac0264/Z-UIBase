@@ -26,7 +26,7 @@ public class UIModuleInventoryView : MonoBehaviour, IEnhancedScrollerDelegate
     void Start()
     {
         masterScroller.Delegate = this;
-        itemDatas = DataPlayer.PlayerInventory.GetItemResources();
+        itemDatas = DataPlayer.GetModule<PlayerInventory>().GetItemResources();
         LoadData();
     }
 

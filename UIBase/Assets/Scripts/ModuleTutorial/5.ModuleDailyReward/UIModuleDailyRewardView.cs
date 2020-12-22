@@ -15,8 +15,11 @@ public class UIModuleDailyRewardView : MonoBehaviour
     private TimeBarView timeBarView = null;
 
     private List<Reward> rewardList = new List<Reward>();
+
+    private PlayerDailyReward playerDailyReward = null;
     private void Start()
     {
+        playerDailyReward = DataPlayer.GetModule<PlayerDailyReward>();
         prefab = LoadResourceController.GetDailyRewardView();
         dailyRewardCollection = LoadResourceController.GetDailyReward();
         TimeManager.Ins.UpdateTime(UpdateView);
@@ -76,14 +79,14 @@ public class UIModuleDailyRewardView : MonoBehaviour
 
     private void SetupFinishDay()
     {
-        DataPlayer.PlayerDailyReward.SetNextDay();
+        playerDailyReward.SetNextDay();
         UpdateView();
     }
 
     public void OnClickClaim()
     {
         rewardList.Clear();
-        for (int i = 0; i < DataPlayer.PlayerDailyReward.GetCurrentDay(); i++)
+        for (int i = 0; i < playerDailyReward.GetCurrentDay(); i++)
         {
             if (!dailyRewardViews[i].IsReceived())
             {

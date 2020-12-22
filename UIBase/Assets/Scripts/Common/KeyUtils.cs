@@ -9,4 +9,6 @@ public class KeyUtils
     public const string CHARACTER_DATA = "CHARACTER_DATA";
     public const string SHOP_DATA = "SHOP_DATA";
     public const string DAILY_REWARD_DATA = "DAILY_REWARD_DATA";
+    public const string GACHA_DATA = "GACHA_DATA";
+    public const string ADS_DATA = "ADS_DATA";
 }

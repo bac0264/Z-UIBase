@@ -24,7 +24,7 @@ public class PlayerInventory
             resourceList.inventoryIdMax = 0;
             for (int i = 0; i < 6; i++)
             {
-                int id = UnityEngine.Random.Range(1, 5) * 1000 + UnityEngine.Random.Range(1,5);
+                int id = UnityEngine.Random.Range(1, 5) * GameConstant.ITEM_ID_CONSTANT + UnityEngine.Random.Range(1,5);
                 resourceList.AddNewData(ItemResource.CreateInstance((int) ResourceType.ItemType, id, 1, resourceList.inventoryIdMax, 0));
             }
 

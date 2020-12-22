@@ -36,15 +36,15 @@ public class Reward : IRecieveReward
     {
         if (resType == (int) ResourceType.ItemType)
         {
-            DataPlayer.PlayerInventory.AddNewItem(ItemResource.CreateInstance(resType, resId, resNumber, 0, 0));
+            DataPlayer.GetModule<PlayerInventory>().AddNewItem(ItemResource.CreateInstance(resType, resId, resNumber, 0, 0));
         }
         else if (resType == (int) ResourceType.MoneyType)
         {
-            DataPlayer.PlayerMoney.AddOne((MoneyType) resId, resNumber);
+            DataPlayer.GetModule<PlayerMoney>().AddOne((MoneyType) resId, resNumber);
         }
         else if (resType == (int) ResourceType.CharacterType)
         {
-            DataPlayer.PlayerCharacter.AddCharacter(CharacterResource.CreateInstance(resType, resId, resNumber));
+            DataPlayer.GetModule<PlayerCharacter>().AddCharacter(CharacterResource.CreateInstance(resType, resId, resNumber));
         }
         else
         {

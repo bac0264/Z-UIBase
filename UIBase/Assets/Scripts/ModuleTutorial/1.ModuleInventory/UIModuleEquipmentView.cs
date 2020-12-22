@@ -11,7 +11,9 @@ public class UIModuleEquipmentView : MonoBehaviour
     public Action<ItemResource> OnRightClickEvent;
 
     private CharacterResource currentCharacter;
-
+    
+    private PlayerInventory playerInventory = null;
+    private PlayerCharacter playerCharacter = null;
     private void OnValidate()
     {
         if (equipments == null || equipments.Length == 0)
@@ -22,6 +24,9 @@ public class UIModuleEquipmentView : MonoBehaviour
 
     public virtual void Start()
     {
+        playerInventory = DataPlayer.GetModule<PlayerInventory>();
+        playerCharacter = DataPlayer.GetModule<PlayerCharacter>();
+        
         SetupEvent();
         RefreshUI();
     }
@@ -36,8 +41,8 @@ public class UIModuleEquipmentView : MonoBehaviour
 
     public void RefreshUI()
     {
-        currentCharacter = DataPlayer.PlayerCharacter.GetCurrentCharacter();
-        var itemList = DataPlayer.PlayerInventory.GetEquipmentItemWithIdCharacter(currentCharacter.characterId);
+        currentCharacter = playerCharacter.GetCurrentCharacter();
+        var itemList = playerInventory.GetEquipmentItemWithIdCharacter(currentCharacter.characterId);
         
         for (int i = 0; i < equipments.Length; i++)
         {
@@ -69,14 +74,14 @@ public class UIModuleEquipmentView : MonoBehaviour
 
         if (equipSlot.itemResource != null)
         {
-            DataPlayer.PlayerInventory.RemoveEquipmentItem(currentCharacter.characterId, equipSlot.itemResource);
-            DataPlayer.PlayerInventory.AddItem(equipSlot.itemResource);
+            playerInventory.RemoveEquipmentItem(currentCharacter.characterId, equipSlot.itemResource);
+            playerInventory.AddItem(equipSlot.itemResource);
         }
 
         equipSlot.SetupItem(item);
 
-        DataPlayer.PlayerInventory.AddEquipmentItem(currentCharacter.characterId, equipSlot.itemResource);
-        DataPlayer.PlayerInventory.RemoveItem(equipSlot.itemResource);
+        playerInventory.AddEquipmentItem(currentCharacter.characterId, equipSlot.itemResource);
+        playerInventory.RemoveItem(equipSlot.itemResource);
 
         // reload data in Inventory
         reloadData?.Invoke();
@@ -96,8 +101,8 @@ public class UIModuleEquipmentView : MonoBehaviour
 
         equipSlot.SetupItem(null);
 
-        DataPlayer.PlayerInventory.AddItem(item);
-        DataPlayer.PlayerInventory.RemoveEquipmentItem(currentCharacter.characterId, item);
+        playerInventory.AddItem(item);
+        playerInventory.RemoveEquipmentItem(currentCharacter.characterId, item);
     
         // reload data in Inventory
         reloadData?.Invoke();

@@ -16,9 +16,9 @@ public class MoneyBarView : IconView
 
     public void OnEnable()
     {
-        if (moneyType != MoneyType.NONE)
+        if (moneyType != MoneyType.None)
         {
-            var data = DataPlayer.PlayerMoney.GetMoney(moneyType);
+            var data = DataPlayer.GetModule<PlayerMoney>().GetMoney(moneyType);
             SetData(data);
         }
     }
