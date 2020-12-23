@@ -218,5 +218,10 @@ public class LoadResourceController
     {
         return LoadFromResource<GachaCollection>(PathUtils.gachaConfig);
     }
+    
+    public static AdsConfigCollection GetAdsConfigCollection()
+    {
+        return LoadFromResource<AdsConfigCollection>(PathUtils.adsConfig);
+    }
     #endregion
 }

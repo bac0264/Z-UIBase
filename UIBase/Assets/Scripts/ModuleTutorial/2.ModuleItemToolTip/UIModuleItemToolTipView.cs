@@ -86,7 +86,7 @@ public class UIModuleItemToolTipView : MonoBehaviour
         nextLevelTxt.text = "next level: " + (itemView.itemResource.level + 2);
 
         upgradeMoneyBar.SetData(upgradeCollection.dataGroups.GetPrice(itemPick.level));
-        sellMoneyBar.SetData(sellCollection.GetSellData(itemPick.GetPriority()).GetPrice());
+        sellMoneyBar.SetData(sellCollection.GetSellData(itemPick.rarity).GetPrice());
 
         nextStatsContainer.SetActive(!isMaxLevel);
     }
@@ -111,7 +111,7 @@ public class UIModuleItemToolTipView : MonoBehaviour
 
     private void OnClickSellItem()
     {
-        var goldSell  = sellCollection.GetSellData(itemPick.GetPriority()).GetPrice().number;
+        var goldSell  = sellCollection.GetSellData(itemPick.rarity).GetPrice().number;
 
         if (itemPick != null)
         {

@@ -20,6 +20,7 @@ public class ItemResource : Resource
 
     public int level;
 
+    [NonSerialized] public int rarity;
     
     [NonSerialized] private ItemStatCollection itemStatCollection = null;
     [NonSerialized] private UpgradeItemCollection upgradeItemCollection = null;
@@ -58,7 +59,9 @@ public class ItemResource : Resource
 
     public void ReloadItemStats()
     {
-        itemStats = itemStatCollection.GetItemStatDataWithItemId(id).GetItemStats(level);
+        var data = itemStatCollection.GetItemStatDataWithItemId(id);
+        rarity = data.rarity;
+        itemStats = data.GetItemStats(level);
     }
 
     public bool IsMaxLevel()

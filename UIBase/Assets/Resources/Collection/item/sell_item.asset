@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: sell_item
   m_EditorClassIdentifier: 
   dataGroups:
-  - priority: 1
+  - rarity: 1
     sellRequire:
       resType: 0
       resId: 1
       resNumber: 100
     option1: 2
-  - priority: 2
+  - rarity: 2
     sellRequire:
       resType: 0
       resId: 1
       resNumber: 200
     option1: 3
-  - priority: 3
+  - rarity: 3
     sellRequire:
       resType: 0
       resId: 1
       resNumber: 300
     option1: 4
-  - priority: 4
+  - rarity: 4
     sellRequire:
       resType: 0
       resId: 1

@@ -20,7 +20,7 @@ public class PlayerAds
         if (adsSaveLoad == null)
         {
             adsSaveLoad = new PlayerAdsSaveLoad();
-            adsSaveLoad.adsCount = 0;
+            adsSaveLoad.adsCount = 1;
         }
     }
 
@@ -32,6 +32,12 @@ public class PlayerAds
     public void AddAds(int value)
     {
         adsSaveLoad.adsCount += value;
+        Save();
+    }
+
+    public int GetAdsCount()
+    {
+        return adsSaveLoad.adsCount;
     }
 }
 

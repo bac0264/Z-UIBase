@@ -12,3 +12,4 @@ id,class_collection,class_data,asset_path
 11,CharacterLevelCollection,CharacterLevelData,Collection/character/character_level
 12,DailyRewardCollection,DailyRewardData,Collection/daily_reward/daily_reward
 13,GachaCollection,GachaData,Collection/gacha/gacha_config
+14,AdsConfigCollection,AdsConfigData,Collection/ads/ads_config

@@ -70,4 +70,15 @@ public class Reward : IRecieveReward
 
         return rewards.ToArray();
     }
+    
+    public static Resource[] GetResources(Reward[] rewardList)
+    {
+        List<Resource> rewards = new List<Resource>();
+        for (int i = 0; i < rewardList.Length; i++)
+        {
+            rewards.Add(rewardList[i].GetResource());
+        }
+
+        return rewards.ToArray();
+    }
 }

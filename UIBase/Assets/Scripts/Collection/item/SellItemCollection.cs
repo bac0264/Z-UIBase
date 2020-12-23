@@ -7,11 +7,11 @@ public class SellItemCollection : ScriptableObject
 {
     public SellItemData[] dataGroups;
 
-    public SellItemData GetSellData(int priority)
+    public SellItemData GetSellData(int rarity)
     {
         for (int i = 0; i < dataGroups.Length; i++)
         {
-            if (dataGroups[i].priority == priority)
+            if (dataGroups[i].rarity == rarity)
             {
                 return dataGroups[i];
             }
@@ -24,14 +24,14 @@ public class SellItemCollection : ScriptableObject
 [System.Serializable]
 public class SellItemData
 {
-    public int priority;
+    public int rarity;
     public Reward sellRequire;
     public float option1;
 
     public Resource GetPrice()
     {
         var resource = sellRequire.GetResource();
-        resource.number = sellRequire.resNumber + priority * (long) option1;
+        resource.number = sellRequire.resNumber + rarity * (long) option1;
         return resource;
     }
 }

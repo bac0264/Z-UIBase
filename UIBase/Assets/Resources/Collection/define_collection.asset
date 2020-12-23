@@ -65,3 +65,7 @@ MonoBehaviour:
     classCollection: GachaCollection
     classData: GachaData
     assetPath: Collection/gacha/gacha_config
+  - id: 14
+    classCollection: AdsConfigCollection
+    classData: AdsConfigData
+    assetPath: Collection/ads/ads_config

@@ -11,8 +11,13 @@ public class UIIronsourceDemo : MonoBehaviour
     [SerializeField] private Button rewardBtn = null;
     [SerializeField] private Button interBtn = null;
 
+    private AdsConfigCollection adsConfigCollection;
+    private PlayerAds playerAds;
+    
     private void Awake()
     {
+        adsConfigCollection = LoadResourceController.GetAdsConfigCollection();
+        playerAds = DataPlayer.GetModule<PlayerAds>();
         InitButtons();
     }
 
@@ -23,12 +28,13 @@ public class UIIronsourceDemo : MonoBehaviour
     }
     
     private void OnClickRewardVideo()
-    {    
-        rewardTxt.text = "reward btn";
+    {
         void onSuccess()
         {
-            rewardTxt.text = "reward onsuccess";
-            Debug.Log("rewardTxt: " + rewardTxt.text);
+            var adsData = adsConfigCollection.GetAdsConfigData(playerAds.GetAdsCount());
+            WindowManager.Instance.ShowWindowWithData<Reward[]>(WindowType.UI_SHOW_REWARD, adsData.Rewards);
+            
+            playerAds.AddAds(1);
         }
         
         IronSourceManager.instance.ShowRewardedVideo(onSuccess);

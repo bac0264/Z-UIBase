@@ -27,7 +27,8 @@ public class ItemStatData
 {
     public int id;
     public int[] statTypes;
-
+    public int rarity;
+    
     private StatConfigCollection statConfigCollection = null;
 
     public void SetStatConfigCollection(StatConfigCollection statConfigCollection)
