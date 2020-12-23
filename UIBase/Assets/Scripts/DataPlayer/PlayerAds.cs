@@ -44,5 +44,5 @@ public class PlayerAds
 [System.Serializable]
 public class PlayerAdsSaveLoad
 {
-    public int adsCount ;
+    [JsonProperty("0")] public int adsCount ;
 }

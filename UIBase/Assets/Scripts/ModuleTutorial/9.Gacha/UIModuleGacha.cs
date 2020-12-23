@@ -18,10 +18,10 @@ public class UIModuleGacha : MonoBehaviour
     {
         collection = LoadResourceController.GetGachaConfigCollection();
         prefab = LoadResourceController.GetGachaTab();
-        InitView();
+        InitOrUpdateView();
     }
 
-    private void InitView()
+    private void InitOrUpdateView()
     {
         int i = 0;
         for (; i < collection.dataGroups.Length; i++)

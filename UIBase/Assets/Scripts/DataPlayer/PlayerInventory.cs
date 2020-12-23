@@ -120,9 +120,9 @@ public class PlayerInventory
 [System.Serializable]
 public class PlayerInventorySaveLoad : DataSave<ItemResource>
 {
-    public int inventoryIdMax = 0;
+    [JsonProperty("1")] public int inventoryIdMax = 0;
 
-    public List<PlayerEquipment> playerEquipments = new List<PlayerEquipment>();
+    [JsonProperty("2")] public List<PlayerEquipment> playerEquipments = new List<PlayerEquipment>();
 
     public void AddNewData(ItemResource t)
     {

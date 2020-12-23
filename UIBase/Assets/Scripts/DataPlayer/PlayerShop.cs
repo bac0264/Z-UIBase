@@ -53,14 +53,16 @@ public enum ShopEnum
     RAW_PACK_FREE = 1,
     BUNDLE = 2,
 }
+
 [Serializable]
 public class DataSaveShop
 {
-    [JsonIgnore]
-    public Dictionary<ShopEnum, Dictionary<int, int>> shopDic = new Dictionary<ShopEnum, Dictionary<int, int>>();
-    public Dictionary<int, int> rawPackFreeCount = new Dictionary<int, int>();
-    public Dictionary<int, int> bundlePackBoughtCount= new Dictionary<int, int>();
-    public Dictionary<int, int> rawPackBoughtCount = new Dictionary<int, int>();
+    [JsonIgnore] [NonSerialized]
+    private Dictionary<ShopEnum, Dictionary<int, int>> shopDic = new Dictionary<ShopEnum, Dictionary<int, int>>();
+ 
+    [JsonProperty("0")] public Dictionary<int, int> rawPackFreeCount = new Dictionary<int, int>();
+    [JsonProperty("1")] public Dictionary<int, int> bundlePackBoughtCount= new Dictionary<int, int>();
+    [JsonProperty("2")] public Dictionary<int, int> rawPackBoughtCount = new Dictionary<int, int>();
 
     public void Load()
     {

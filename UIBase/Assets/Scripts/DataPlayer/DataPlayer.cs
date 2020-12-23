@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 
@@ -159,7 +160,7 @@ public static class DataPlayer
 [System.Serializable]
 public class DataSave<T>
 {
-    public List<T> dataList;
+    [JsonProperty("0")] public List<T> dataList;
 
     public DataSave()
     {

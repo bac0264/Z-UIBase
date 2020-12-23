@@ -15,6 +15,8 @@ public class PathUtils
     public const string iconCurrencies = "iconCurrencies/{0}";
     public const string iconStats = "IconStats/{0}";
     public const string iconGachas = "IconGachas/{0}";
+    public const string iconCampaignMode = "IconCampaignMode/{0}";
+    public const string iconCampaignMap = "IconCampaignMap/{0}";
     public const string backgroundGacha = "BackgroundGacha/{0}";
     
     public const string rawPackView = "Prefabs/raw_pack_view";
@@ -25,6 +27,9 @@ public class PathUtils
     public const string dailyRewardView = "Prefabs/daily_reward_view";
     public const string timeBarView = "Prefabs/time_bar_view";
     public const string gachaTab = "Prefabs/gacha_tab";
+    public const string campaignModeView = "Prefabs/campaign_mode_view";
+    public const string campaignMapView = "Prefabs/campaign_map_view";
+    public const string campaignStageView = "Prefabs/campaign_stage_view";
     
     public const string defineCollection = "Collection/define_collection";
     public const string shopRawPack = "Collection/shop/shop_raw_pack";
@@ -39,4 +44,5 @@ public class PathUtils
     public const string dailyReward = "Collection/daily_reward/daily_reward";
     public const string gachaConfig = "Collection/gacha/gacha_config";
     public const string adsConfig = "Collection/ads/ads_config";
+    public const string campaignConfig = "Collection/campaign/campaign_config";
 }

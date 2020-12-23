@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 [System.Serializable]
 public class PlayerCharacterSaveLoad : DataSave<CharacterResource>
 {
-    public int currentCharacter;
+    [JsonProperty("1")] public int currentCharacter;
 }
 public class PlayerCharacter
 {

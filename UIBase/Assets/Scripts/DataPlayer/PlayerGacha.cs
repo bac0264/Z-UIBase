@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerGachaSaveLoad
 {
-    public Dictionary<long, long> lastTimeGacha1Dict = new Dictionary<long, long>();
+    [JsonProperty("0")] public Dictionary<long, long> lastTimeGacha1Dict = new Dictionary<long, long>();
 }
 public class PlayerGacha
 {

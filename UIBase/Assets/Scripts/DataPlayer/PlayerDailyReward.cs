@@ -107,9 +107,9 @@ public class PlayerDailyReward
 [System.Serializable]
 public class DailyRewardSaveLoad
 {
-    public int currentDay;
-    public long lastTimeOnline;
-    public Dictionary<int, int> dayReceivedDic = new Dictionary<int, int>();
+    [JsonProperty("0")] public int currentDay;
+    [JsonProperty("1")] public long lastTimeOnline;
+    [JsonProperty("2")] public Dictionary<int, int> dayReceivedDic = new Dictionary<int, int>();
 
     public DailyRewardSaveLoad()
     {

@@ -113,6 +113,16 @@ public class LoadResourceController
         return LoadFromResource<Sprite>(string.Format(PathUtils.iconStats, id));
     }
 
+    public static Sprite GetCampaignModeIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconCampaignMode, id));
+    }
+
+    public static Sprite GetCampaignMapIcon(int id)
+    {
+        return LoadFromResource<Sprite>(string.Format(PathUtils.iconCampaignMap, id));
+    }
+    
     #endregion
     
     #region Get Prefabs
@@ -154,6 +164,21 @@ public class LoadResourceController
     public static GachaTab GetGachaTab()
     {
         return LoadFromResource<GachaTab>(PathUtils.gachaTab);
+    }
+    
+    public static CampaignModeView GetCampaignModeView()
+    {
+        return LoadFromResource<CampaignModeView>(PathUtils.campaignModeView);
+    }
+    
+    public static CampaignMapView GetCampaignMapView()
+    {
+        return LoadFromResource<CampaignMapView>(PathUtils.campaignMapView);
+    }
+    
+    public static CampaignStageView GetCampaignStageView()
+    {
+        return LoadFromResource<CampaignStageView>(PathUtils.campaignStageView);
     }
     #endregion
     
@@ -222,6 +247,11 @@ public class LoadResourceController
     public static AdsConfigCollection GetAdsConfigCollection()
     {
         return LoadFromResource<AdsConfigCollection>(PathUtils.adsConfig);
+    }
+    
+    public static CampaignConfigCollection GetCampaignConfigCollection()
+    {
+        return LoadFromResource<CampaignConfigCollection>(PathUtils.campaignConfig);
     }
     #endregion
 }

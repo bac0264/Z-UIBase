@@ -69,3 +69,7 @@ MonoBehaviour:
     classCollection: AdsConfigCollection
     classData: AdsConfigData
     assetPath: Collection/ads/ads_config
+  - id: 15
+    classCollection: CampaignConfigCollection
+    classData: CampaignStageData
+    assetPath: Collection/campaign/campaign_config
