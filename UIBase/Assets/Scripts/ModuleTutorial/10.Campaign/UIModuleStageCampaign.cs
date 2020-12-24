@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using EnhancedUI.EnhancedScroller;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIModuleStageCampaign : MonoBehaviour, IEnhancedScrollerDelegate
 {
@@ -11,11 +13,24 @@ public class UIModuleStageCampaign : MonoBehaviour, IEnhancedScrollerDelegate
     private List<CampaignStageData> _data;
     
     private CampaignStageView stageViewPrefab;
-    
+
+    private CampaignConfigCollection campaignCollection = null;
+    private PlayerCampaign playerCampaign;
+    private void Awake()
+    {
+        stageViewPrefab = LoadResourceController.GetCampaignStageView();
+        playerCampaign = DataPlayer.GetModule<PlayerCampaign>();
+        campaignCollection = LoadResourceController.GetCampaignConfigCollection();
+        mapConfig = campaignCollection.GetMapCampaignConfigWithStageId(playerCampaign.GetLastStagePass());
+    }
+
+    private void Start()
+    {
+        UpdateView(mapConfig);
+    }
 
     public void UpdateView(CampaignMapConfig mapConfig)
     {
-        if (stageViewPrefab == null) stageViewPrefab = LoadResourceController.GetCampaignStageView();
         this.mapConfig = mapConfig;
         
         LoadData();
@@ -26,8 +41,25 @@ public class UIModuleStageCampaign : MonoBehaviour, IEnhancedScrollerDelegate
         _data = mapConfig.stageList;
         scroller.Delegate = this;
         scroller.ReloadData();
+        scroller.JumpToDataIndex(CampaignStageData.GetStageIndex(playerCampaign.GetLastStagePass()) - 1);
     }
+    
+    
+    public void SetNextLevel()
+    {
+        var dataNextLevel = campaignCollection.GetNextStage(playerCampaign.GetLastStagePass());
+        if (dataNextLevel != null)
+        {
+            DataPlayer.GetModule<PlayerCampaign>().SetLastStagePass(dataNextLevel.stage);
+        }
 
+        SceneManager.LoadScene("10.Stage");
+    }
+    
+    public void OnClickMap()
+    {
+        SceneManager.LoadScene("10.Mode");
+    }
     public int GetNumberOfCells(EnhancedScroller scroller)
     {
         // in this example, we just pass the number of our data elements
@@ -37,7 +69,7 @@ public class UIModuleStageCampaign : MonoBehaviour, IEnhancedScrollerDelegate
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
     {
         // in this example, even numbered cells are 30 pixels tall, odd numbered cells are 100 pixels tall
-        return 100;
+        return 300;
     }
 
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int dataIndex, int cellIndex)

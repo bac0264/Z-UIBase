@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-[System.Serializable]
 public class PlayerShop
 {
     private DataSaveShop dataShop;
@@ -27,7 +26,6 @@ public class PlayerShop
             dataShop = new DataSaveShop();
             Save();
         }
-        dataShop.Load();
     }
     
     public void AddBought(ShopEnum type, int idPack)
@@ -57,22 +55,26 @@ public enum ShopEnum
 [Serializable]
 public class DataSaveShop
 {
-    [JsonIgnore] [NonSerialized]
+    [JsonIgnore]
     private Dictionary<ShopEnum, Dictionary<int, int>> shopDic = new Dictionary<ShopEnum, Dictionary<int, int>>();
  
     [JsonProperty("0")] public Dictionary<int, int> rawPackFreeCount = new Dictionary<int, int>();
     [JsonProperty("1")] public Dictionary<int, int> bundlePackBoughtCount= new Dictionary<int, int>();
     [JsonProperty("2")] public Dictionary<int, int> rawPackBoughtCount = new Dictionary<int, int>();
 
-    public void Load()
+    public void UpdateShopDict()
     {
-        shopDic.Add(ShopEnum.RAW_PACK, rawPackBoughtCount);
-        shopDic.Add(ShopEnum.BUNDLE, bundlePackBoughtCount);
-        shopDic.Add(ShopEnum.RAW_PACK_FREE, rawPackFreeCount);
+        if (shopDic.Count == 0)
+        {
+            shopDic.Add(ShopEnum.RAW_PACK, rawPackBoughtCount);
+            shopDic.Add(ShopEnum.BUNDLE, bundlePackBoughtCount);
+            shopDic.Add(ShopEnum.RAW_PACK_FREE, rawPackFreeCount);
+        }
     }
     
     public void AddBought(ShopEnum type, int id)
     {
+        UpdateShopDict();
         var data = shopDic[type];
         if (data.ContainsKey(id))
         {
@@ -86,6 +88,7 @@ public class DataSaveShop
 
     public int GetBoughtCount(ShopEnum type, int id)
     {
+        UpdateShopDict();
         var data = shopDic[type];
         if (data.ContainsKey(id))
         {
@@ -100,6 +103,7 @@ public class DataSaveShop
 
     public bool IsAvailableForBuying(ShopEnum type, int id, int stock)
     {
+        UpdateShopDict();
         if (stock == -1) return true;
         var data = shopDic[type];
         return GetBoughtCount(type, id) < stock;

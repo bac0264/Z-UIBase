@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Purchasing;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIShopRawPackView : MonoBehaviour
@@ -28,7 +24,6 @@ public class UIShopRawPackView : MonoBehaviour
     private void Awake()
     {
         playerShop = DataPlayer.GetModule<PlayerShop>();
-        
         InitButtons();
         InitLocalize();
     }

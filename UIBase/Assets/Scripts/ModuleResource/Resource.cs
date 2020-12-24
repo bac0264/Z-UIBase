@@ -23,6 +23,8 @@ public enum MoneyType
     None = -1,
     Gold = 0,
     Gem = 1,
+    VipPoint = 2,
+    Potion = 3,
     
     KeyBasic = 10,
     KeyPremium = 11,

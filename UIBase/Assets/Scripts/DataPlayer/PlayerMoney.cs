@@ -143,6 +143,7 @@ public class PlayerMoney
             resourceList = new DataSave<Resource>();
             AddOne(MoneyType.Gem, 100000);
             AddOne(MoneyType.Gold, 100000);
+            AddOne(MoneyType.Potion, 100000);
             AddOne(MoneyType.KeyBasic, 100000);
             AddOne(MoneyType.KeyPremium, 100000);
         }

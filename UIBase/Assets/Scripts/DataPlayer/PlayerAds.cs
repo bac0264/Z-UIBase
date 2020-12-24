@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using UnityEngine;
 
-[System.Serializable]
 public class PlayerAds
 {
     private PlayerAdsSaveLoad adsSaveLoad;

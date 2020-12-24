@@ -73,3 +73,7 @@ MonoBehaviour:
     classCollection: CampaignConfigCollection
     classData: CampaignStageData
     assetPath: Collection/campaign/campaign_config
+  - id: 16
+    classCollection: CampaignRequireConfigCollection
+    classData: CampaignRequireConfigData
+    assetPath: Collection/campaign/campaign_require_config

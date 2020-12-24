@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnhancedScrollerDemos.MultipleCellTypesDemo;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIModuleModeCampaign : MonoBehaviour
 {
     [SerializeField] private Transform campaignViewAnchor;
     [SerializeField] private Snap snap;
-    [SerializeField] private UIModuleMapCampaign uiModuleCampaign;
+    
+    [SerializeField] private Transform buttonGo;
+    [SerializeField] private Transform buttonLock;
     
     private CampaignConfigCollection collection = null;
     
@@ -20,7 +24,9 @@ public class UIModuleModeCampaign : MonoBehaviour
         collection = LoadResourceController.GetCampaignConfigCollection();
         prefab = LoadResourceController.GetCampaignModeView();
 
+        
         InitOrUpdateView();
+        
     }
 
     private void InitOrUpdateView()
@@ -40,22 +46,46 @@ public class UIModuleModeCampaign : MonoBehaviour
                 snap.AddRectTransform(view.GetComponent<RectTransform>());
             }
         }
-        snap.SetupSnap();
+        snap.SetupSnap(RefreshUI);
     }
 
     public void OnClickGo()
     {
         var modeIndex = snap.GetIndex() + 1;
+
+        var mode = collection.GetModeCampaignWithId(modeIndex);
+        DataPlayer.GetModule<PlayerCampaign>().SetModePick(modeIndex);
+        SceneManager.LoadScene("10.Map");
+        // uiModuleCampaign.InitOrUpdateView(mode);
+        // uiModuleCampaign.gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void RefreshUI()
+    {
+        var modeIndex = snap.GetIndex() + 1;
+
         var mode = collection.GetModeCampaignWithId(modeIndex);
         
         if (mode == null)
         {
             Debug.Log("comming soon");
+            buttonGo.gameObject.SetActive(false);
+            buttonLock.gameObject.SetActive(true);
             return;
         }
         
-        uiModuleCampaign.InitOrUpdateView(mode);
-        uiModuleCampaign.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        var state = mode.GetStateWithModeId();
+
+        if (state == ModeState.Completed || state == ModeState.Opening)
+        {
+            buttonGo.gameObject.SetActive(true);
+            buttonLock.gameObject.SetActive(false);
+        }
+        else 
+        {
+            buttonGo.gameObject.SetActive(false);
+            buttonLock.gameObject.SetActive(true);
+        }
     }
 }

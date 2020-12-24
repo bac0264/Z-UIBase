@@ -2,21 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+
+public enum StageState
+{
+    Completed = 0,
+    Opening = 1,
+    Lock = 2,
+}
 
 [System.Serializable]
 public class CampaignStageData
 {
     public int stage;
     public Reward[] rewards;
+
+    public StageState GetState()
+    {
+        var lastId = DataPlayer.GetModule<PlayerCampaign>().GetLastStagePass();
+
+        if (stage < lastId) return StageState.Completed;
+
+        if (stage == lastId) return StageState.Opening;
+
+        return StageState.Lock;
+    }
+
+    public static int GetStageIndex(int stage)
+    {
+        return stage % 100000 % 1000;
+    }
 }
 
 [System.Serializable]
 public class CampaignConfigCollection : ScriptableObject
 {
-    public CampaignStageData[] dataGroups;
+    private CampaignStageData[] dataGroups;
 
     public CampaignWorldConfig worldConfig;
 
@@ -24,30 +44,35 @@ public class CampaignConfigCollection : ScriptableObject
     {
         var modeId = CampaignModeConfig.GetModeId(stage);
         var mode = GetModeCampaignWithId(modeId);
-        return mode.IsPassWorldMap(stage);
+        return mode.IsPassModeWithStage(stage);
     }
 
-    public CampaignStageData GetNextStage(int currentStage)
+    public CampaignStageData GetNextStage(int lastStage)
     {
-        var modeId = CampaignModeConfig.GetModeId(currentStage);
+        var modeId = CampaignModeConfig.GetModeId(lastStage);
 
         // check mode with current stage
         var mode = GetModeCampaignWithId(modeId);
         if (mode == null) return null;
 
         // check map with current stage
-        var mapId = CampaignMapConfig.GetMapId(currentStage);
+        var mapId = CampaignMapConfig.GetMapId(lastStage);
 
         var map = mode.GetMapWithId(mapId);
         if (map == null) return null;
 
-        var stage = map.GetNextStage(currentStage);
+        var stage = map.GetNextStage(lastStage);
         if (stage != null)
         {
             return stage;
         }
-        else
+
+        // check stage in next map
+        mapId += 1;
+        map = mode.GetMapWithId(mapId);
+        if (map == null)
         {
+            // if not exist next map, check stage in next mode
             modeId += 1;
             mode = GetModeCampaignWithId(modeId);
             if (mode == null) return null;
@@ -55,8 +80,16 @@ public class CampaignConfigCollection : ScriptableObject
             map = mode.GetMapWithId(1);
             if (map == null) return null;
 
-            stage = map.GetNextStage(currentStage);
+            stage = map.GetNextStage(lastStage);
             if (stage != null) return stage;
+        }
+        else
+        {
+            stage = map.GetNextStage(lastStage);
+            if (stage != null)
+            {
+                return stage;
+            }
         }
 
         return null;
@@ -67,9 +100,12 @@ public class CampaignConfigCollection : ScriptableObject
         return worldConfig.GetModeCampaignWithId(id);
     }
 
-    #region Parse data
+    public CampaignMapConfig GetMapCampaignConfigWithStageId(int stage)
+    {
+        return worldConfig.GetModeCampaignWithStageId(stage).GetMapWithStageId(stage);
+    }
 
-    public void SetupWorldConfig()
+    public void Convert()
     {
         if (dataGroups.Length > 0)
         {
@@ -113,8 +149,6 @@ public class CampaignConfigCollection : ScriptableObject
             worldConfig = modeConfigList;
         }
     }
-
-    #endregion
 }
 
 
@@ -132,6 +166,25 @@ public class CampaignWorldConfig
 
         return null;
     }
+
+    public CampaignModeConfig GetModeCampaignWithStageId(int stageId)
+    {
+        var id = CampaignModeConfig.GetModeId(stageId);
+        for (int i = 0; i < modeConfigList.Count; i++)
+        {
+            if (id == modeConfigList[i].modeId) return modeConfigList[i];
+        }
+
+        return null;
+    }
+}
+
+public enum ModeState
+{
+    Completed = 0,
+    Opening = 1,
+    Lock = 2,
+    CommingSoon = 3,
 }
 
 [System.Serializable]
@@ -140,7 +193,7 @@ public class CampaignModeConfig
     public int modeId;
     public List<CampaignMapConfig> mapList = new List<CampaignMapConfig>();
 
-    public bool IsPassWorldMap(int stage)
+    public bool IsPassModeWithStage(int stage)
     {
         var count = mapList.Count;
         if (count > 0)
@@ -156,6 +209,16 @@ public class CampaignModeConfig
         return false;
     }
 
+    public ModeState GetStateWithModeId()
+    {
+        var currentId = GetModeId(DataPlayer.GetModule<PlayerCampaign>().GetLastStagePass());
+        if (currentId == 1000) return ModeState.CommingSoon;
+        if (modeId < currentId) return ModeState.Completed;
+        if (modeId == currentId) return ModeState.Opening;
+        if (modeId > currentId) return ModeState.Lock;
+        return ModeState.CommingSoon;
+    }
+
     public CampaignMapConfig GetMapWithId(int mapId)
     {
         for (int i = 0; i < mapList.Count; i++)
@@ -165,13 +228,30 @@ public class CampaignModeConfig
 
         return null;
     }
-    
+
+    public CampaignMapConfig GetMapWithStageId(int stageId)
+    {
+        var mapId = CampaignMapConfig.GetMapId(stageId);
+        for (int i = 0; i < mapList.Count; i++)
+        {
+            if (mapId == mapList[i].mapId) return mapList[i];
+        }
+
+        return null;
+    }
+
     public static int GetModeId(int stageId)
     {
         return stageId / 100000;
     }
 }
 
+public enum MapState
+{
+    Completed = 0,
+    Opening = 1,
+    Lock = 2,
+}
 
 [System.Serializable]
 public class CampaignMapConfig
@@ -198,35 +278,22 @@ public class CampaignMapConfig
 
         return null;
     }
-    
+
+    public MapState GetState()
+    {
+        var lastMapId = GetMapId(DataPlayer.GetModule<PlayerCampaign>().GetLastStagePass());
+
+        if (mapId < lastMapId)
+            return MapState.Completed;
+
+        if (mapId == lastMapId)
+            return MapState.Opening;
+
+        return MapState.Lock;
+    }
+
     public static int GetMapId(int stageId)
     {
         return stageId % 100000 / 1000;
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(CampaignConfigCollection))]
-[CanEditMultipleObjects]
-public class CampaignConfigEditor : Editor
-{
-    [MenuItem("Tools/MyTool/Do It in C#")]
-    static void DoIt()
-    {
-        EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");
-    }
-
-    public override void OnInspectorGUI()
-    {
-        CampaignConfigCollection myscript = (CampaignConfigCollection) target;
-
-        if (GUILayout.Button("Load World Config"))
-        {
-            myscript.SetupWorldConfig();
-            EditorUtility.SetDirty(myscript);
-        }
-
-        base.OnInspectorGUI();
-    }
-}
-#endif

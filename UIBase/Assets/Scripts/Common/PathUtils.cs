@@ -45,4 +45,5 @@ public class PathUtils
     public const string gachaConfig = "Collection/gacha/gacha_config";
     public const string adsConfig = "Collection/ads/ads_config";
     public const string campaignConfig = "Collection/campaign/campaign_config";
+    public const string campaignRequireConfig = "Collection/campaign/campaign_require_config";
 }

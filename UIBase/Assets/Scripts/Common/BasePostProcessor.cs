@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using EnhancedScrollerDemos.MultipleCellTypesDemo;
@@ -39,9 +41,15 @@ public class BasePostProcessor : AssetPostprocessor
                 }
 
                 Type type = classData;
-                var field = gm.GetType().GetField("dataGroups");
+                var field = gm.GetType().GetField("dataGroups",BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                var method = gm.GetType().GetMethod("Convert");
+                
                 field.SetValue(gm, CSVSerializer.Deserialize(data.text, type));
-
+                
+                method?.Invoke(gm, null);
+                
+                if(field.IsPrivate) field.SetValue(gm, null);
+                
                 EditorUtility.SetDirty(gm);
                 AssetDatabase.SaveAssets();
             };
@@ -82,7 +90,7 @@ public class BasePostProcessor : AssetPostprocessor
                         classData = Type.GetType("DefineData");
                         genAsset(assetfile, textAsset, classCollection, classData);
                     }
-                    
+
                     defineCollection = LoadResourceController.GetDefineCollection();
                     var defineData = defineCollection.GetDefineCollectionData(path);
                     if (defineData == null) return;
@@ -92,7 +100,7 @@ public class BasePostProcessor : AssetPostprocessor
                     classData = Type.GetType(defineData.classData);
                     genAsset(assetfile, data, classCollection, classData);
                 }
-                
+
 #if DEBUG_LOG || UNITY_EDITOR
                 Debug.Log("Reimported Asset: " + assetfile);
 #endif

@@ -253,5 +253,10 @@ public class LoadResourceController
     {
         return LoadFromResource<CampaignConfigCollection>(PathUtils.campaignConfig);
     }
+    
+    public static CampaignRequireConfigCollection GetCampaignRequireConfigCollection()
+    {
+        return LoadFromResource<CampaignRequireConfigCollection>(PathUtils.campaignRequireConfig);
+    }
     #endregion
 }

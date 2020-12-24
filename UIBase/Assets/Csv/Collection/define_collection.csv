@@ -14,3 +14,4 @@ id,class_collection,class_data,asset_path
 13,GachaCollection,GachaData,Collection/gacha/gacha_config
 14,AdsConfigCollection,AdsConfigData,Collection/ads/ads_config
 15,CampaignConfigCollection,CampaignStageData,Collection/campaign/campaign_config
+16,CampaignRequireConfigCollection,CampaignRequireConfigData,Collection/campaign/campaign_require_config

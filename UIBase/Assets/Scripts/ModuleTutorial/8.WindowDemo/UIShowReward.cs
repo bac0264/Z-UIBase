@@ -18,10 +18,10 @@ public class UIShowReward : BaseWindowGeneric<Reward[]>
     {
         rewards = _data1;
 
-        ShowReward();
+        InitOrUpdateView();
     }
 
-    private void ShowReward()
+    private void InitOrUpdateView()
     {
         if (prefab == null)
             prefab = LoadResourceController.GetIconView();

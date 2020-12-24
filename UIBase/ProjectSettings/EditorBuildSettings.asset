@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/ModuleTutorial/3.IronsourceManager/3.Ads.unity
     guid: b3ca17bba1ce6c54e9b2515990a16e89
+  - enabled: 1
+    path: Assets/Scripts/ModuleTutorial/10.Campaign/10.Stage.unity
+    guid: 7dfd6ed0b073193458b81bd38f665a06
+  - enabled: 1
+    path: Assets/Scripts/ModuleTutorial/10.Campaign/10.Mode.unity
+    guid: ad11bb248277991449afdaf6254c38a7
+  - enabled: 1
+    path: Assets/Scripts/ModuleTutorial/10.Campaign/10.Map.unity
+    guid: c899a9fc82ccf824f865342b1bcfef84
+  - enabled: 1
+    path: Assets/Scripts/ModuleTutorial/10.Campaign/10.Result.unity
+    guid: 2190899f5b6aa0048842b08d47a6f96a
   m_configObjects: {}

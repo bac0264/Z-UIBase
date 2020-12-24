@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public enum WindowType
 {
-    UI_SHOW_REWARD,
+    UI_SHOW_REWARD = 0,
+    UI_RESULT_CAMPAIGN = 1,
 }
 
 public class BaseWindow : MonoBehaviour
@@ -23,7 +24,7 @@ public class BaseWindow : MonoBehaviour
         //name = type.ToString();
     }
 
-    private void Awake()
+    public virtual void Awake()
     {
         if(closeBtn != null) closeBtn.onClick.AddListener(OnHide);
     }

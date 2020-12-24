@@ -23,16 +23,15 @@ public class Snap : MonoBehaviour
     private bool startSnap;
     private bool dragging = false;
 
-    public void SetupSnap()
+    private Action callback = null;
+    public void SetupSnap(Action callback = null)
     {
-        //StartCoroutine(_setupSnap());
+        this.callback = callback;
         Invoke("_setupSnap", 0.1f);
     }
 
     private void _setupSnap()
     {
-        //yield return new WaitForEndOfFrame();
-
         bttnDistance = (int) Mathf.Abs(posList[1].anchoredPosition.x - posList[0].anchoredPosition.x);
         MaxDistance = bttnDistance;
 
@@ -76,6 +75,7 @@ public class Snap : MonoBehaviour
                 if (minDistance == distance[a])
                 {
                     minIndex = a;
+                    callback?.Invoke();
                     break;
                 }
             }
