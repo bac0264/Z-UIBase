@@ -30,6 +30,7 @@ public class PathUtils
     public const string campaignModeView = "Prefabs/campaign_mode_view";
     public const string campaignMapView = "Prefabs/campaign_map_view";
     public const string campaignStageView = "Prefabs/campaign_stage_view";
+    public const string dailyQuestView = "Prefabs/daily_quest_view";
     
     public const string defineCollection = "Collection/define_collection";
     public const string shopRawPack = "Collection/shop/shop_raw_pack";
@@ -46,4 +47,5 @@ public class PathUtils
     public const string adsConfig = "Collection/ads/ads_config";
     public const string campaignConfig = "Collection/campaign/campaign_config";
     public const string campaignRequireConfig = "Collection/campaign/campaign_require_config";
+    public const string dailyQuestConfig = "Collection/daily_quest/daily_quest";
 }

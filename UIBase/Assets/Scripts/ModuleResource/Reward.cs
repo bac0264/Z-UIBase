@@ -52,6 +52,13 @@ public class Reward : IRecieveReward
         }
     }
 
+    public static void RecieveManyRewards(Reward[] rewards)
+    {
+        foreach (var reward in rewards)
+        {
+            reward.RecieveReward();
+        }
+    }
     public static Reward[] FixDuplicateRewards(List<Reward> rewardList)
     {
         List<Reward> rewards = new List<Reward>();

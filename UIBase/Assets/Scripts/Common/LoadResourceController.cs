@@ -180,6 +180,11 @@ public class LoadResourceController
     {
         return LoadFromResource<CampaignStageView>(PathUtils.campaignStageView);
     }
+    
+    public static DailyQuestView GetDailyQuestView()
+    {
+        return LoadFromResource<DailyQuestView>(PathUtils.dailyQuestView);
+    }
     #endregion
     
     #region Get Collection
@@ -252,6 +257,11 @@ public class LoadResourceController
     public static CampaignConfigCollection GetCampaignConfigCollection()
     {
         return LoadFromResource<CampaignConfigCollection>(PathUtils.campaignConfig);
+    }
+    
+    public static DailyQuestCollection GetDailyQuestCollection()
+    {
+        return LoadFromResource<DailyQuestCollection>(PathUtils.dailyQuestConfig);
     }
     
     public static CampaignRequireConfigCollection GetCampaignRequireConfigCollection()

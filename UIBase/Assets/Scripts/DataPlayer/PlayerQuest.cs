@@ -12,10 +12,21 @@ public class PlayerQuest
         Load();
     }
 
+
+    public QuestProgress GetProgressWithId(int id)
+    {
+        return playerQuestData.GetQuestProgress(id);
+    }
+    
     
     private void Load()
     {
         playerQuestData = JsonConvert.DeserializeObject<PlayerQuestData>(PlayerPrefs.GetString(KeyUtils.QUEST_DATA));
+
+        if (playerQuestData == null)
+        {
+            playerQuestData = new PlayerQuestData();
+        }
     }
     
     public void Save()
@@ -27,7 +38,27 @@ public class PlayerQuest
 [System.Serializable]
 public class PlayerQuestData
 {
-    private Dictionary<int, QuestProgress> questDict = new Dictionary<int, QuestProgress>();
+    private Dictionary<int, QuestProgress> dailyQuest = new Dictionary<int, QuestProgress>();
+
+    public QuestProgress GetQuestProgress(int id)
+    {
+        if (dailyQuest.ContainsKey(id))
+        {
+            return dailyQuest[id];
+        }
+        var questProgess = new QuestProgress()
+        {
+            progress =  0,
+            state = 0
+        };
+        dailyQuest.Add(id, questProgess);
+        return questProgess;
+    }
+
+    public void AddQuest(int type, int value)
+    {
+        
+    }
 }
 [System.Serializable]
 public class QuestProgress
@@ -48,7 +79,7 @@ public class QuestProgress
 
 public enum QuestState
 {
-    Doing,
-    Done,
-    Claimed
+    Doing = 0,
+    Done = 1,
+    Claimed = 2,
 }

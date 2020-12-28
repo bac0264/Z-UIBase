@@ -77,3 +77,7 @@ MonoBehaviour:
     classCollection: CampaignRequireConfigCollection
     classData: CampaignRequireConfigData
     assetPath: Collection/campaign/campaign_require_config
+  - id: 17
+    classCollection: DailyQuestCollection
+    classData: DailyQuestData
+    assetPath: Collection/daily_quest/daily_quest

@@ -11,5 +11,9 @@ public class DailyQuestCollection : ScriptableObject
 [System.Serializable]
 public class DailyQuestData : BaseQuestData
 {
-    
+
+    public QuestProgress GetProgress()
+    {
+        return DataPlayer.GetModule<PlayerQuest>().GetProgressWithId(id);
+    }
 }

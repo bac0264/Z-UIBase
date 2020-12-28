@@ -15,3 +15,4 @@ id,class_collection,class_data,asset_path
 14,AdsConfigCollection,AdsConfigData,Collection/ads/ads_config
 15,CampaignConfigCollection,CampaignStageData,Collection/campaign/campaign_config
 16,CampaignRequireConfigCollection,CampaignRequireConfigData,Collection/campaign/campaign_require_config
+17,DailyQuestCollection,DailyQuestData,Collection/daily_quest/daily_quest
