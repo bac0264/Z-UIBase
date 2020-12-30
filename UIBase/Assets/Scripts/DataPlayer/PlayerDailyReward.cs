@@ -8,7 +8,7 @@ public class PlayerDailyReward
 {
     private DailyRewardSaveLoad dailyReward;
 
-    [NonSerialized] private int DAY_MAX;
+    private int DAY_MAX;
 
     public PlayerDailyReward()
     {
@@ -69,19 +69,14 @@ public class PlayerDailyReward
         return dailyReward.currentDay == day;
     }
 
-    public long GetLastTimeOnline()
-    {
-        return dailyReward.GetLastTimeOnline();
-    }
-
-    public void SetLastTimeOnline(long lastTimeOnline)
+    public void UpdateDailyReward(long oldLastTimeOnline, long lastTimeOnline)
     {
         // Set new current day
-        if (dailyReward.lastTimeOnline > 1000)
+        if (oldLastTimeOnline > 1000)
         {
-            var dayBonus = TimeUtils.GetDayCount(dailyReward.lastTimeOnline, lastTimeOnline);
+            var dayBonus = TimeUtils.GetDayCount(oldLastTimeOnline, lastTimeOnline);
             
-            if (dayBonus >= 0 && dailyReward.currentDay < DAY_MAX)
+            if (dayBonus > 0 && dailyReward.currentDay < DAY_MAX)
             {
                 dailyReward.currentDay += (int) dayBonus;
                 if (dailyReward.currentDay > DAY_MAX) dailyReward.currentDay = DAY_MAX;
@@ -90,17 +85,8 @@ public class PlayerDailyReward
             {
                 Reset();
             }
+            Save();
         }
-
-        // Set current time
-        dailyReward.SetLastTimeOnline(lastTimeOnline);
-        Save();
-    }
-
-    public void Add1Day()
-    {
-        dailyReward.lastTimeOnline -= TimeUtils.GetTimeADay();
-        Save();
     }
 }
 
@@ -108,8 +94,7 @@ public class PlayerDailyReward
 public class DailyRewardSaveLoad
 {
     [JsonProperty("0")] public int currentDay;
-    [JsonProperty("1")] public long lastTimeOnline;
-    [JsonProperty("2")] public Dictionary<int, int> dayReceivedDic = new Dictionary<int, int>();
+    [JsonProperty("1")] public Dictionary<int, int> dayReceivedDic = new Dictionary<int, int>();
 
     public DailyRewardSaveLoad()
     {
@@ -131,15 +116,5 @@ public class DailyRewardSaveLoad
     public bool IsReceived(int day)
     {
         return dayReceivedDic.ContainsKey(day);
-    }
-
-    public void SetLastTimeOnline(long lastTimeOnline)
-    {
-        this.lastTimeOnline = lastTimeOnline;
-    }
-
-    public long GetLastTimeOnline()
-    {
-        return lastTimeOnline;
     }
 }

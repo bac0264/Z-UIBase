@@ -25,6 +25,9 @@ public class DailyQuestView : EnhancedScrollerCellView
     private List<IconView> iconViews = new List<IconView>();
     private IconView prefab = null;
 
+    private int index;
+    
+    private Action<int> reloadData = null;
     private void Awake()
     {
         prefab = LoadResourceController.GetIconView();
@@ -33,21 +36,30 @@ public class DailyQuestView : EnhancedScrollerCellView
 
     private void OnCickClaim()
     {
+        questProgress.Claim();
+        reloadData?.Invoke(index);
+        
         Reward.RecieveManyRewards(questData.rewards);
+        WindowManager.Instance.ShowWindowWithData<Reward[]>(WindowType.UI_SHOW_REWARD, questData.rewards);
+        
     }
 
-    public void SetData(DailyQuestData questData)
+    public void SetData(DailyQuestData questData, Action<int> reloadData, int index)
     {
         this.questData = questData;
         this.questProgress = questData.GetProgress();
-
+        this.reloadData = reloadData;
+        this.index = index;
+        
         progressTxt.text = questProgress.progress + "/" + questData.required;
-        id.text = "id: " + questData.id;
         type.text = ((QuestType) questData.type).ToString();
-
+        id.text = "id: " + questData.id;
+        
         var fill = (float) questProgress.progress / questData.required;
         progress.fillAmount = fill;
-
+        
+        claimBtn.interactable = questProgress.GetState() == QuestState.Done;
+        
         InitOrUpdateView();
     }
 
@@ -73,9 +85,5 @@ public class DailyQuestView : EnhancedScrollerCellView
         {
             iconViews[i].gameObject.SetActive(false);
         }
-    }
-
-    private void UpdateProgress()
-    {
     }
 }

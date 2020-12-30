@@ -3,43 +3,62 @@ using System.Collections.Generic;
 using EnhancedUI.EnhancedScroller;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class UIModuleDailyQuest : MonoBehaviour,IEnhancedScrollerDelegate
+public class UIModuleDailyQuest : MonoBehaviour, IEnhancedScrollerDelegate
 {
     public EnhancedScroller scroller;
-    
+
     private DailyQuestData[] _data;
-    
     private DailyQuestView dailyQuestPrefab;
 
     private DailyQuestCollection dailyQuestCollection = null;
-    private PlayerQuest playerQuest;
+    private PlayerDailyQuest playerQuest;
+
     private void Awake()
     {
+        PublisherService.Register();
         dailyQuestPrefab = LoadResourceController.GetDailyQuestView();
-        playerQuest = DataPlayer.GetModule<PlayerQuest>();
+        playerQuest = DataPlayer.GetModule<PlayerDailyQuest>();
         dailyQuestCollection = LoadResourceController.GetDailyQuestCollection();
     }
 
     private void Start()
     {
         UpdateView();
+        PublisherService.DebugLog();
     }
 
     public void UpdateView()
     {
         LoadData();
     }
-    
+
     private void LoadData()
     {
         _data = dailyQuestCollection.dataGroups;
         scroller.Delegate = this;
+        ReloadData();
+    }
+
+    private void ReloadData(int index = 0)
+    {
         scroller.ReloadData();
-       // scroller.JumpToDataIndex(CampaignStageData.GetStageIndex(playerQuest.GetLastStagePass()) - 1);
+        scroller.JumpToDataIndex(index);
     }
     
-    
+    public InputField progress;
+    public InputField subjectType;
+
+    public void AddProgress()
+    {
+        PublisherService.NotifyListener(new BaseListenerData((SubjectType) int.Parse(subjectType.text),
+            int.Parse(progress.text)));
+         SceneManager.LoadScene("6.DailyQuest");
+    }
+
+    #region setup enhance
+
     public int GetNumberOfCells(EnhancedScroller scroller)
     {
         // in this example, we just pass the number of our data elements
@@ -65,9 +84,11 @@ public class UIModuleDailyQuest : MonoBehaviour,IEnhancedScrollerDelegate
         cellView.name = "Cell " + dataIndex.ToString();
 
         // in this example, we just pass the data to our cell's view which will update its UI
-        cellView.SetData(_data[dataIndex]);
+        cellView.SetData(_data[dataIndex], ReloadData, dataIndex);
 
         // return the cell to the scroller
         return cellView;
     }
+
+    #endregion
 }

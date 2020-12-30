@@ -59,6 +59,7 @@ public class Reward : IRecieveReward
             reward.RecieveReward();
         }
     }
+    
     public static Reward[] FixDuplicateRewards(List<Reward> rewardList)
     {
         List<Reward> rewards = new List<Reward>();

@@ -14,23 +14,23 @@ public class TimeManager : MonoBehaviour
     public bool check;
 
     private Coroutine startTime = null;
-
-    private PlayerDailyReward dataReward = null;
+    
+    private PlayerTime timeData = null;
     //make sure there is only one instance of this always.
     void Awake()
     {
-        if (Ins == null)
-        {
-            Ins = this;
-        }
-        else if (Ins != this)
-        {
-            Destroy(gameObject);
-        }
+        // if (Ins == null)
+        // {
+             Ins = this;
+        // }
+        // else if (Ins != this)
+        // {
+        //     Destroy(gameObject);
+        // }
 
         //DontDestroyOnLoad(gameObject);
         UpdateTime();
-        dataReward = DataPlayer.GetModule<PlayerDailyReward>();
+        timeData = DataPlayer.GetModule<PlayerTime>();
     }
 
     public void UpdateTime(Action callBack = null)
@@ -44,7 +44,7 @@ public class TimeManager : MonoBehaviour
         {
             if (currentTime.TotalSecondTimeStamp() > 1000 && check)
             {
-                dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+                timeData.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
             }
         }
     }
@@ -53,7 +53,7 @@ public class TimeManager : MonoBehaviour
     {
         if (currentTime.TotalSecondTimeStamp() > 1000 && check)
         {
-            dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+            timeData.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
         }
     }
 
@@ -61,7 +61,7 @@ public class TimeManager : MonoBehaviour
     {
         if (currentTime.TotalSecondTimeStamp() > 1000 && check)
         {
-            dataReward.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
+            timeData.SetLastTimeOnline(currentTime.TotalSecondTimeStamp());
             if (startTime == null)
                 startTime = StartCoroutine(TimeCountDown());
         }
@@ -117,8 +117,9 @@ public class TimeManager : MonoBehaviour
 
     public void Add1Day()
     {
-        dataReward.Add1Day();
-        SceneManager.LoadScene("5.DailyReward");
+        timeData.Add1Day();
+        Debug.Log("SceneManager.GetActiveScene().name:" +SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("6.DailyQuest");
     }
 
     IEnumerator TimeCountDown()

@@ -13,4 +13,5 @@ public class KeyUtils
     public const string ADS_DATA = "ADS_DATA";
     public const string CAMPAIGN_DATA = "CAMPAIGN_DATA";
     public const string QUEST_DATA = "QUEST_DATA";
+    public const string TIME_DATA = "TIME_DATA";
 }
